@@ -1,9 +1,11 @@
 import {defineField, defineType} from 'sanity'
+import {BoltIcon} from '@sanity/icons'
 
 export const runType = defineType({
   name: 'run',
   title: 'Run',
   type: 'document',
+  icon: BoltIcon,
   fields: [
     defineField({
       name: 'title',
