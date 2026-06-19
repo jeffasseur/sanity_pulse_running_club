@@ -36,7 +36,8 @@ export const runType = defineType({
     defineField({
       name: 'location',
       title: 'Location',
-      type: 'string',
+      type: 'reference',
+      to: [{type: 'location'}],
     }),
     defineField({
       name: 'date',
