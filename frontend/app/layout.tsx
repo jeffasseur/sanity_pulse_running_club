@@ -13,7 +13,7 @@ import Footer from '@/app/components/Footer'
 import Header from '@/app/components/header/Header'
 import * as demo from '@/sanity/lib/demo'
 import {sanityFetch, SanityLive} from '@/sanity/lib/live'
-import {settingsQuery} from '@/sanity/lib/queries'
+import {navigationQuery, settingsQuery} from '@/sanity/lib/queries'
 import {resolveOpenGraphImage} from '@/sanity/lib/utils'
 import {handleError} from '@/app/client-utils'
 
@@ -67,6 +67,11 @@ const ibmPlexMono = IBM_Plex_Mono({
 
 export default async function RootLayout({children}: LayoutProps<'/'>) {
   const {isEnabled: isDraftMode} = await draftMode()
+  const {data: navigation} = await sanityFetch({
+    query: navigationQuery,
+    // Navigation is used in the header, so it should be live but doesn't need stega
+    stega: false,
+  })
 
   return (
     <html lang="en" className={`${inter.variable} ${ibmPlexMono.variable} bg-white text-black`}>
@@ -83,7 +88,7 @@ export default async function RootLayout({children}: LayoutProps<'/'>) {
           )}
           {/* The <SanityLive> component is responsible for making all sanityFetch calls in your application live, so should always be rendered. */}
           <SanityLive onError={handleError} />
-          <Header />
+          <Header navigation={navigation} />
           <main className="">{children}</main>
           <Footer />
         </section>

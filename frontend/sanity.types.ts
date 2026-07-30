@@ -190,6 +190,21 @@ export type Location = {
   longitude?: number
 }
 
+export type Navigation = {
+  _id: string
+  _type: 'navigation'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  items?: Array<{
+    label?: string
+    link: Link
+    _type: 'item'
+    _key: string
+  }>
+}
+
 export type Settings = {
   _id: string
   _type: 'settings'
@@ -547,6 +562,7 @@ export type AllSanitySchemaTypes =
   | SanityImageHotspot
   | Slug
   | Location
+  | Navigation
   | Settings
   | Page
   | PersonReference
@@ -615,6 +631,24 @@ export type SettingsQueryResult = {
     metadataBase?: string
     _type: 'image'
   }
+} | null
+
+// Source: sanity/lib/queries.ts
+// Variable: navigationQuery
+// Query: *[_type == "navigation"][0]
+export type NavigationQueryResult = {
+  _id: string
+  _type: 'navigation'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  items?: Array<{
+    label?: string
+    link: Link
+    _type: 'item'
+    _key: string
+  }>
 } | null
 
 // Source: sanity/lib/queries.ts
@@ -862,6 +896,7 @@ import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
     '*[_type == "settings"][0]': SettingsQueryResult
+    '*[_type == "navigation"][0]': NavigationQueryResult
     '\n  *[_type == \'page\' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    heading,\n    subheading,\n    "pageBuilder": pageBuilder[]{\n      ...,\n      _type == "callToAction" => {\n        ...,\n        button {\n          ...,\n          \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n        }\n      },\n      _type == "infoSection" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n          }\n        }\n      },\n    },\n  }\n': GetPageQueryResult
     '\n  *[_type == "page" || _type == "post" && defined(slug.current)] | order(_type asc) {\n    "slug": slug.current,\n    _type,\n    _updatedAt,\n  }\n': SitemapDataResult
     '\n  *[_type == "post" && defined(slug.current)] | order(date desc, _updatedAt desc) {\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage,\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  }\n': AllPostsQueryResult

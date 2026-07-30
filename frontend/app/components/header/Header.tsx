@@ -4,8 +4,10 @@ import Link from 'next/link'
 import './style.css'
 import initCenteredScalingNavigationBar from '.'
 import { useEffect } from 'react'
+import {NavigationQueryResult} from '@/sanity.types'
+import ResolvedLink from '../ResolvedLink'
 
-export default function Header() {
+export default function Header({navigation}: {navigation: NavigationQueryResult}) {
   useEffect(() => {
     initCenteredScalingNavigationBar()
   }, [])
@@ -55,31 +57,17 @@ export default function Header() {
         <div className="centered-nav__content">
           <div className="centered-nav__inner">
             <ul className="centered-nav__ul">
-              <div data-navigation-item="" className="centered-nav__li">
-                <a href="#" className="hamburger-nav__a">
-                  <p className="hamburger-nav__p">Home</p>
-                </a>
-              </div>
-              <div data-navigation-item="" className="centered-nav__li">
-                <a href="#" className="hamburger-nav__a">
-                  <p className="hamburger-nav__p">Portfolio</p>
-                </a>
-              </div>
-              <div data-navigation-item="" className="centered-nav__li">
-                <a href="#" className="hamburger-nav__a">
-                  <p className="hamburger-nav__p">About us</p>
-                </a>
-              </div>
-              <div data-navigation-item="" className="centered-nav__li">
-                <a href="#" className="hamburger-nav__a">
-                  <p className="hamburger-nav__p">Our services</p>
-                </a>
-              </div>
-              <div data-navigation-item="" className="centered-nav__li">
-                <a href="#" className="hamburger-nav__a">
-                  <p className="hamburger-nav__p">Approach</p>
-                </a>
-              </div>
+              {navigation?.items?.map((item) => (
+                <li key={item._key} className="centered-nav__li" data-nav-toggle="close">
+                  <ResolvedLink
+                    link={item?.link}
+                    className="hamburger-nav__a w-inline-block"
+                    data-nav-toggle="close"
+                  >
+                    <span className="hamburger-nav__p">{item.label}</span>
+                  </ResolvedLink>
+                </li>
+              ))}
             </ul>
             <div data-navigation-item="" className="centered-nav__banner-w">
               <Link href="mailto:sayhi@pulserunning.be" className="centered-nav__banner">
