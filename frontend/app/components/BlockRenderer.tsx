@@ -1,9 +1,11 @@
 import React from 'react'
 
 import Cta from '@/app/components/Cta'
+import HeroAbout from '@/app/components/HeroAbout'
 import Info from '@/app/components/InfoSection'
 import {dataAttr} from '@/sanity/lib/utils'
 import {PageBuilderSection} from '@/sanity/lib/types'
+import RunsOverviewSection from './RunsOverviewSection'
 
 type BlockProps = {
   index: number
@@ -19,6 +21,8 @@ type BlocksType = {
 const Blocks = {
   callToAction: Cta,
   infoSection: Info,
+  heroAbout: HeroAbout,
+  runsOverviewSection: RunsOverviewSection,
 } as BlocksType
 
 /**

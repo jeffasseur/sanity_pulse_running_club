@@ -45,6 +45,26 @@ export type SanityImageAssetReference = {
   [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
 }
 
+export type HeroAbout = {
+  _type: 'heroAbout'
+  heading: string
+  subheading?: string
+  images?: Array<{
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+    _key: string
+  }>
+  stats?: Array<{
+    value: string
+    label: string
+    _type: 'stat'
+    _key: string
+  }>
+}
+
 export type CallToAction = {
   _type: 'callToAction'
   eyebrow?: string
@@ -127,6 +147,18 @@ export type Button = {
   link?: Link
 }
 
+export type Faq = {
+  _id: string
+  _type: 'faq'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  question: string
+  answer: BlockContent
+  category?: string
+  orderRank?: string
+}
+
 export type LocationReference = {
   _ref: string
   _type: 'reference'
@@ -188,6 +220,47 @@ export type Location = {
   address?: string
   latitude?: number
   longitude?: number
+}
+
+export type RunReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'run'
+}
+
+export type HomePage = {
+  _id: string
+  _type: 'homePage'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title: string
+  subtitle?: string
+  pageBuilder?: Array<
+    | ({
+        _key: string
+      } & CallToAction)
+    | ({
+        _key: string
+      } & InfoSection)
+    | ({
+        _key: string
+      } & HeroAbout)
+  >
+  featuredRuns?: Array<
+    {
+      _key: string
+    } & RunReference
+  >
+  ogImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
 }
 
 export type Navigation = {
@@ -262,6 +335,9 @@ export type Page = {
     | ({
         _key: string
       } & InfoSection)
+    | ({
+        _key: string
+      } & HeroAbout)
   >
 }
 
@@ -551,17 +627,21 @@ export type AllSanitySchemaTypes =
   | PostReference
   | Link
   | SanityImageAssetReference
+  | HeroAbout
   | CallToAction
   | InfoSection
   | BlockContentTextOnly
   | BlockContent
   | Button
+  | Faq
   | LocationReference
   | Run
   | SanityImageCrop
   | SanityImageHotspot
   | Slug
   | Location
+  | RunReference
+  | HomePage
   | Navigation
   | Settings
   | Page

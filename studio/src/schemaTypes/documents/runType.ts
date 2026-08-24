@@ -57,4 +57,11 @@ export const runType = defineType({
       type: 'string',
     }),
   ],
+  preview: {
+    select: {
+      title: 'title',
+      subtitle: 'date',
+      media: 'image',
+    },
+  },
 })

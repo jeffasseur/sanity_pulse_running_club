@@ -2,12 +2,14 @@
 
 import Link from 'next/link'
 import './style.css'
-import initCenteredScalingNavigationBar from '.'
+import initCenteredScalingNavigationBar from './index'
 import { useEffect } from 'react'
 import {NavigationQueryResult} from '@/sanity.types'
 import ResolvedLink from '../ResolvedLink'
 
 export default function Header({navigation}: {navigation: NavigationQueryResult}) {
+  const bannerTitle = 'Join us on Strava'
+
   useEffect(() => {
     initCenteredScalingNavigationBar()
   }, [])
@@ -18,7 +20,7 @@ export default function Header({navigation}: {navigation: NavigationQueryResult}
       <div className="centered-nav">
         <div className="centered-nav__bg"></div>
         <div className="centered-nav__header">
-          <a href="#" className="centered-nav__logo">
+          <Link href="/" className="centered-nav__logo">
             <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 663 208" fill="none">
               <g clipPath="url(#clip0_1_14)">
                 <path
@@ -48,7 +50,7 @@ export default function Header({navigation}: {navigation: NavigationQueryResult}
                 </clipPath>
               </defs>
             </svg>
-          </a>
+          </Link>
           <button data-navigation-toggle="toggle" data-hover="" className="centered-nav__toggle">
             <div className="centered-nav__toggle-bar"></div>
             <div className="centered-nav__toggle-bar"></div>
@@ -61,7 +63,7 @@ export default function Header({navigation}: {navigation: NavigationQueryResult}
                 <li key={item._key} className="centered-nav__li" data-nav-toggle="close">
                   <ResolvedLink
                     link={item?.link}
-                    className="hamburger-nav__a w-inline-block"
+                    className="hamburger-nav__a"
                     data-nav-toggle="close"
                   >
                     <span className="hamburger-nav__p">{item.label}</span>
@@ -70,40 +72,44 @@ export default function Header({navigation}: {navigation: NavigationQueryResult}
               ))}
             </ul>
             <div data-navigation-item="" className="centered-nav__banner-w">
-              <Link href="mailto:sayhi@pulserunning.be" className="centered-nav__banner">
+              <Link
+                href="https://www.strava.com/clubs/1778757"
+                target="_blank"
+                className="centered-nav__banner"
+              >
                 <div className="centered-nav__banner-row">
                   <div data-css-marquee-list="" className="centered-nav__banner-item">
                     <div className="centered-nav__banner-inner">
-                      <p className="centered-nav__banner-text">Contact us</p>
+                      <p className="centered-nav__banner-text">{bannerTitle}</p>
                     </div>
                     <div className="centered-nav__banner-inner">
-                      <p className="centered-nav__banner-text">Contact us</p>
+                      <p className="centered-nav__banner-text">{bannerTitle}</p>
                     </div>
                     <div className="centered-nav__banner-inner">
-                      <p className="centered-nav__banner-text">Contact us</p>
+                      <p className="centered-nav__banner-text">{bannerTitle}</p>
                     </div>
                     <div className="centered-nav__banner-inner">
-                      <p className="centered-nav__banner-text">Contact us</p>
+                      <p className="centered-nav__banner-text">{bannerTitle}</p>
                     </div>
                     <div className="centered-nav__banner-inner">
-                      <p className="centered-nav__banner-text">Contact us</p>
+                      <p className="centered-nav__banner-text">{bannerTitle}</p>
                     </div>
                   </div>
                   <div data-css-marquee-list="" className="centered-nav__banner-item">
                     <div className="centered-nav__banner-inner">
-                      <p className="centered-nav__banner-text">Contact us</p>
+                      <p className="centered-nav__banner-text">{bannerTitle}</p>
                     </div>
                     <div className="centered-nav__banner-inner">
-                      <p className="centered-nav__banner-text">Contact us</p>
+                      <p className="centered-nav__banner-text">{bannerTitle}</p>
                     </div>
                     <div className="centered-nav__banner-inner">
-                      <p className="centered-nav__banner-text">Contact us</p>
+                      <p className="centered-nav__banner-text">{bannerTitle}</p>
                     </div>
                     <div className="centered-nav__banner-inner">
-                      <p className="centered-nav__banner-text">Contact us</p>
+                      <p className="centered-nav__banner-text">{bannerTitle}</p>
                     </div>
                     <div className="centered-nav__banner-inner">
-                      <p className="centered-nav__banner-text">Contact us</p>
+                      <p className="centered-nav__banner-text">{bannerTitle}</p>
                     </div>
                   </div>
                 </div>
