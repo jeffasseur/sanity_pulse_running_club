@@ -1,7 +1,6 @@
 'use client'
 
 import * as React from 'react'
-import {initCountdown} from '@/lib/initCountDown'
 import Button from '@/app/components/elements/Button'
 import Countdown from './HeroSection/Countdown'
 import SanityImage from '@/app/components/SanityImage'
@@ -76,9 +75,6 @@ export default function HeroSection({
       clearTimeout(timer2)
     }
   }, [])
-
-  initCountdown()
-  // const heroImages = sortHeroGalleryImages(heroGallery)
 
   return (
     <section className="relative flex h-screen flex-col items-start justify-end overflow-hidden bg-black text-white">
