@@ -95,7 +95,7 @@ export default function HeroAbout({block}: HeroAboutProps) {
         <div
           ref={galleryRef}
           style={{transitionDelay: '300ms'}}
-          className={`relative left-1/2 right-1/2 my-16 -mx-[50vw] flex h-[280px] w-screen gap-4 lg:h-[420px] lg:gap-6 ${fadeUp(galleryInView)}`}
+          className={`relative left-1/2 right-1/2 my-16 mx-[-50vw] flex h-70 w-screen gap-4 lg:h-105 lg:gap-6 ${fadeUp(galleryInView)}`}
         >
           {galleryImages.map((image) => (
             <div key={image._key} className="flex-1 overflow-hidden">

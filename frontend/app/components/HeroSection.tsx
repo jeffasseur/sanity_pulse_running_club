@@ -1,38 +1,42 @@
 'use client'
 
-import Image from 'next/image'
 import * as React from 'react'
 import {initCountdown} from '@/lib/initCountDown'
 import Button from '@/app/components/elements/Button'
 import Countdown from './HeroSection/Countdown'
+import SanityImage from '@/app/components/SanityImage'
 
-type HeroImage = {
-  src: string
-  position: string
+function sortHeroGalleryImages(heroGallery?: {asset: {_ref: string}; position: string}[]) {
+  const imagePositions = [
+    {
+      position: 'top-[8%] right-[70%]',
+    },
+    {
+      position: 'top-[7%] right-[3%]',
+    },
+    {
+      position: 'top-[66%] right-[10%]',
+    },
+    {
+      position: 'bottom-[9%] right-[45%]',
+    },
+    {
+      position: 'top-[25%] right-[30%]',
+    },
+  ]
+  if (!heroGallery) {
+    return
+  }
+
+  // merge positions from imagePositions into heroGallery based on index
+  heroGallery.forEach((image, index) => {
+    if (imagePositions[index]) {
+      image.position = imagePositions[index].position
+    }
+  })
+
+  return heroGallery
 }
-
-const images: HeroImage[] = [
-  {
-    src: 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&w=400&q=80',
-    position: 'top-[8%] right-[70%]',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=400&q=80',
-    position: 'top-[2%] right-[30%]',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1571008887538-b36bb32f4571?auto=format&fit=crop&w=400&q=80',
-    position: 'top-[46%] right-[10%]',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1486218119243-13883505764c?auto=format&fit=crop&w=400&q=80',
-    position: 'bottom-[33%] right-[60%]',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1517931524326-bdd55a541177?auto=format&fit=crop&w=400&q=80',
-    position: 'top-[54%] right-[35%]',
-  },
-]
 
 function HeadlineLine({
   visible,
@@ -58,7 +62,13 @@ function HeadlineLine({
   )
 }
 
-export default function HeroSection({nextRunDate}: {nextRunDate?: string | null | undefined}) {
+export default function HeroSection({
+  nextRunDate,
+  heroGallery,
+}: {
+  nextRunDate?: string | null | undefined
+  heroGallery?: {asset: {_ref: string}; position: string}[]
+}) {
   const [line1Visible, setLine1Visible] = React.useState(false)
   const [line2Visible, setLine2Visible] = React.useState(false)
 
@@ -72,6 +82,7 @@ export default function HeroSection({nextRunDate}: {nextRunDate?: string | null 
   }, [])
 
   initCountdown()
+  const heroImages = sortHeroGalleryImages(heroGallery)
 
   return (
     <section className="relative flex h-screen flex-col items-start justify-end overflow-hidden bg-black text-white">
@@ -89,20 +100,19 @@ export default function HeroSection({nextRunDate}: {nextRunDate?: string | null 
       </div>
 
       <div className="absolute inset-0">
-        {images.map((image, i) => (
-          <Image
-            key={image.src}
-            src={image.src}
-            width={400}
-            height={400}
-            alt=""
-            loading="lazy"
-            className={`absolute opacity-70 h-35 w-35 rounded-sm object-cover transition-all duration-700 ease-out sm:h-47.5 sm:w-47.5 lg:h-64 lg:w-64 ${image.position && image.position}`}
-            style={{
-              transitionDelay: `${i * 120 + 300}ms`,
-            }}
-          />
-        ))}
+        {heroImages &&
+          heroImages.map((image, i) => (
+            <SanityImage
+              id={image.asset._ref || ''}
+              key={i}
+              role="presentation"
+              loading="lazy"
+              className={`absolute opacity-70 h-35 w-35 rounded-sm object-cover transition-all duration-700 ease-out sm:h-47.5 sm:w-47.5 lg:h-64 lg:w-64 ${image.position && image.position}`}
+              style={{
+                transitionDelay: `${i * 120 + 300}ms`,
+              }}
+            />
+          ))}
       </div>
     </section>
   )

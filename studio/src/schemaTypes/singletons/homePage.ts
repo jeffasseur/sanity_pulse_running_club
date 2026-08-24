@@ -28,6 +28,14 @@ export const homePage = defineType({
     }),
     pageBuilderField(),
     defineField({
+      name: 'heroGallery',
+      title: 'Hero Gallery',
+      description: 'Images to display in the hero section of the homepage.',
+      type: 'array',
+      of: [{type: 'image'}],
+      validation: (Rule) => Rule.max(5),
+    }),
+    defineField({
       name: 'featuredRuns',
       title: 'Featured Runs',
       description: 'Runs to spotlight on the homepage, e.g. the next few upcoming runs.',

@@ -264,6 +264,14 @@ export type HomePage = {
         _key: string
       } & RunsOverviewSection)
   >
+  heroGallery?: Array<{
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+    _key: string
+  }>
   featuredRuns?: Array<
     {
       _key: string

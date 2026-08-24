@@ -172,5 +172,6 @@ export const homePageQuery = defineQuery(`
       ${runFields}
     },
     ogImage,
+    ...
   }
 `)

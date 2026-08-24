@@ -34,7 +34,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Page() {
   const [{data: homePage}] = await Promise.all([sanityFetch({query: homePageQuery})])
-  // @ts-ignore-next-line
+  // @ts-expect-error - nextRunDate is not used in this file, but is passed to HeroSection
   const {data: date}: {data: nextRunDateType | null} = await sanityFetch({
     query: `*[_type == "run" && date >= now()] | order(date asc)[0]{
       date
@@ -54,7 +54,7 @@ export default async function Page() {
 
   return (
     <>
-      <HeroSection nextRunDate={formatedDate} />
+      <HeroSection nextRunDate={formatedDate} heroGallery={homePage?.heroGallery} />
       <PageBuilderPage page={homePage} />
       {/* <RunsOverview runs={upcomingRuns} />
         <div>

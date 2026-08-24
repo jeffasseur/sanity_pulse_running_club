@@ -15,6 +15,19 @@
 export declare const internalGroqTypeReferenceTo: unique symbol
 
 // Source: ../sanity.schema.json
+export type RunsOverviewSectionButton = {
+  text?: string
+  link?: Link
+}
+
+export type RunsOverviewSection = {
+  _type: 'runsOverviewSection'
+  eyebrow?: string
+  heading?: string
+  button?: RunsOverviewSectionButton
+  runs?: 'upcomingRuns' | 'pastRuns' | 'allRuns'
+}
+
 export type PageReference = {
   _ref: string
   _type: 'reference'
@@ -247,7 +260,18 @@ export type HomePage = {
     | ({
         _key: string
       } & HeroAbout)
+    | ({
+        _key: string
+      } & RunsOverviewSection)
   >
+  heroGallery?: Array<{
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+    _key: string
+  }>
   featuredRuns?: Array<
     {
       _key: string
@@ -338,6 +362,9 @@ export type Page = {
     | ({
         _key: string
       } & HeroAbout)
+    | ({
+        _key: string
+      } & RunsOverviewSection)
   >
 }
 
@@ -623,6 +650,8 @@ export type Geopoint = {
 }
 
 export type AllSanitySchemaTypes =
+  | RunsOverviewSectionButton
+  | RunsOverviewSection
   | PageReference
   | PostReference
   | Link
