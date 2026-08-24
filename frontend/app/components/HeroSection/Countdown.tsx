@@ -22,7 +22,7 @@ export default function Countdown({nextRunDate}: CountdownProps) {
       data-countdown-format="long"
       className="flex gap-[0.75em] flex-wrap justify-left items-center max-w-full text-lg md:text-xl"
     >
-      <p className="text-lg font-semibold ml-1 md:text-xl bg-transparent rounded-[0.125em] py-1 px-3 m-0 border border-[#2A2727]">
+      <p className="text-lg font-semibold ml-1 md:text-xl bg-white/10 backdrop-blur-md rounded-[0.125em] py-1 px-3 m-0 border border-[#2A2727]">
         Next run
       </p>
       <p
@@ -33,7 +33,7 @@ export default function Countdown({nextRunDate}: CountdownProps) {
       </p>
       <p
         data-countdown-update="hours"
-        className="bg-transparent rounded-[0.125em] py-1 px-3 m-0 border border-[#2A2727]"
+        className="bg-white/10 backdrop-blur-md rounded-[0.125em] py-1 px-3 m-0 border border-[#2A2727]"
       >
         Hrs
       </p>

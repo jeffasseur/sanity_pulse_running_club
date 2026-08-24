@@ -37,19 +37,27 @@ function RunRow({run, index}: {run: RunListItem, index: number}) {
       )}
 
       <div className="flex flex-col gap-3">
-        <div className="flex items-center gap-3 font-mono text-xs uppercase tracking-widest">
-          {index === 0 && <span className="bg-white rounded-[.25em] px-2 py-1 text-black">Volgende run</span>}
-          {index === 0 && <span className="h-1 w-1 flex-none rounded-full bg-gray-200" />}
+        <div className="flex flex-wrap items-center gap-3 font-mono text-xs uppercase tracking-widest mb-2">
+          {index === 0 && (
+            <div className="flex items-center gap-3">
+              <span className="bg-white rounded-[.25em] px-2 py-1 text-black">Volgende run</span>
+              <span className="h-1 w-1 flex-none rounded-full bg-gray-200" />
+            </div>
+          )}
           {date && (
             <time dateTime={date} className="opacity-70">
               <DateComponent dateString={date} />
             </time>
           )}
-          {location?.name && date && <span className={`h-1 w-1 flex-none rounded-full ${index === 0 ? 'bg-gray-200' : 'bg-gray-400'}`} />}
+          {location?.name && date && (
+            <span
+              className={`h-1 w-1 flex-none rounded-full ${index === 0 ? 'bg-gray-200' : 'bg-gray-400'}`}
+            />
+          )}
           {location?.name && <span className="opacity-70">{location.name}</span>}
         </div>
 
-        <h3 className="text-2xl font-medium tracking-tight text-white">{title}</h3>
+        <h3 className="text-2xl font-medium tracking-tight text-white md:text-3xl">{title}</h3>
 
         {(description || details) && (
           <p className="max-w-prose opacity-70">{description || details}</p>

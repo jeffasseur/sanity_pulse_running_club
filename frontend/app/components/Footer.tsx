@@ -3,7 +3,7 @@ export default function Footer() {
     <footer className="pt-16 pb-5 text-xl font-medium">
       <div className="w-full max-w-400 px-6 mx-auto">
         <div className="flex flex-wrap justify-between items-end mb-32 gap-8">
-          <div className="flex item-end justify-end gap-6">
+          <div className="flex item-end justify-start md:justify-end flex-wrap gap-6">
             <a
               href="mailto:sayhi@pulserunning.be"
               className="line-link-block footer-link w-inline-block"
@@ -44,7 +44,7 @@ export default function Footer() {
               </div>
             </a>
           </div>
-          <div className="flex items-start mt-16 gap-4 text-white">
+          <div className="flex items-start mt-16 gap-4 text-white flex-wraper">
             <a
               href="mailto:sayhi@pulserunning.be"
               className="rounded-sm justify-center items-center flex w-10 h-10 bg-black/70 transition-all p-1 hover:bg-brand"
