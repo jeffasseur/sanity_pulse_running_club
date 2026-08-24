@@ -8,7 +8,7 @@ import SanityImage from '@/app/components/SanityImage'
 import {SanityImageAssetReference, SanityImageCrop, SanityImageHotspot} from '@/sanity.types'
 
 type HeroGalleryImage = {
-  asset: SanityImageAssetReference
+  asset?: SanityImageAssetReference
   media?: unknown
   hotspot?: SanityImageHotspot
   crop?: SanityImageCrop
@@ -99,7 +99,7 @@ export default function HeroSection({
         {heroGallery &&
           heroGallery.map((image, i) => (
             <SanityImage
-              id={image?.asset._ref || ''}
+              id={image?.asset?._ref || ''}
               key={i}
               role="presentation"
               loading="lazy"
