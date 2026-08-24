@@ -91,6 +91,7 @@ export default async function RootLayout({children}: LayoutProps<'/'>) {
           <Header navigation={navigation} />
           <main className="">{children}</main>
         </section>
+        <Footer />
         <SpeedInsights />
       </body>
     </html>
