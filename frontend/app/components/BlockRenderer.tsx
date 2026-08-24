@@ -1,8 +1,10 @@
 import React from 'react'
 
 import Cta from '@/app/components/Cta'
+import FeaturesGridSection from '@/app/components/FeaturesGridSection'
 import HeroAbout from '@/app/components/HeroAbout'
 import Info from '@/app/components/InfoSection'
+import IntroTextSection from '@/app/components/IntroTextSection'
 import {dataAttr} from '@/sanity/lib/utils'
 import {PageBuilderSection} from '@/sanity/lib/types'
 import RunsOverviewSection from './RunsOverviewSection'
@@ -23,6 +25,8 @@ const Blocks = {
   infoSection: Info,
   heroAbout: HeroAbout,
   runsOverviewSection: RunsOverviewSection,
+  introTextSection: IntroTextSection,
+  featuresGridSection: FeaturesGridSection,
 } as BlocksType
 
 /**

@@ -20,6 +20,45 @@ export type RunsOverviewSectionButton = {
   link?: Link
 }
 
+export type Cta = {
+  boldText?: string
+  bodyText?: string
+  button?: Button
+}
+
+export type SanityImageAssetReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+}
+
+export type FeatureCardImage = {
+  asset?: SanityImageAssetReference
+  media?: unknown // Unable to locate the referenced type "featureCard.image.media" in schema
+  hotspot?: SanityImageHotspot
+  crop?: SanityImageCrop
+  _type: 'image'
+}
+
+export type FeaturesGridSection = {
+  _type: 'featuresGridSection'
+  heading: string
+  cards?: Array<{
+    image: FeatureCardImage
+    heading: string
+    body?: string
+    _type: 'featureCard'
+    _key: string
+  }>
+  cta?: Cta
+}
+
+export type IntroTextSection = {
+  _type: 'introTextSection'
+  quote: string
+}
+
 export type RunsOverviewSection = {
   _type: 'runsOverviewSection'
   eyebrow?: string
@@ -49,13 +88,6 @@ export type Link = {
   page?: PageReference
   post?: PostReference
   openInNewTab?: boolean
-}
-
-export type SanityImageAssetReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
 }
 
 export type HeroAbout = {
@@ -263,6 +295,12 @@ export type HomePage = {
     | ({
         _key: string
       } & RunsOverviewSection)
+    | ({
+        _key: string
+      } & IntroTextSection)
+    | ({
+        _key: string
+      } & FeaturesGridSection)
   >
   heroGallery?: Array<{
     asset?: SanityImageAssetReference
@@ -365,6 +403,12 @@ export type Page = {
     | ({
         _key: string
       } & RunsOverviewSection)
+    | ({
+        _key: string
+      } & IntroTextSection)
+    | ({
+        _key: string
+      } & FeaturesGridSection)
   >
 }
 
@@ -651,11 +695,15 @@ export type Geopoint = {
 
 export type AllSanitySchemaTypes =
   | RunsOverviewSectionButton
+  | Cta
+  | SanityImageAssetReference
+  | FeatureCardImage
+  | FeaturesGridSection
+  | IntroTextSection
   | RunsOverviewSection
   | PageReference
   | PostReference
   | Link
-  | SanityImageAssetReference
   | HeroAbout
   | CallToAction
   | InfoSection

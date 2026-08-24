@@ -56,6 +56,16 @@ const pageBuilderProjection = /* groq */ `
       }
     }
   },
+  _type == "featuresGridSection" => {
+    ...,
+    cta {
+      ...,
+      button {
+        ...,
+        ${linkFields}
+      }
+    }
+  },
 `
 
 export const getPageQuery = defineQuery(`

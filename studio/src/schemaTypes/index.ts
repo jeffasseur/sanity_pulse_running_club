@@ -15,6 +15,8 @@ import { locationType } from './documents/locationType'
 import { navigation } from './singletons/navigation'
 import {faq} from './documents/faq'
 import { runsOverviewSection } from './objects/RunsOverviewSection'
+import {introTextSection} from './objects/introTextSection'
+import {featuresGridSection} from './objects/featuresGridSection'
 
 // Export an array of all the schema types.  This is used in the Sanity Studio configuration. https://www.sanity.io/docs/studio/schema-types
 
@@ -39,4 +41,6 @@ export const schemaTypes = [
   heroAbout,
   link,
   runsOverviewSection,
+  introTextSection,
+  featuresGridSection,
 ]

@@ -11,6 +11,8 @@ export const pageBuilderBlockTypes = [
   {type: 'infoSection'},
   {type: 'heroAbout'},
   {type: 'runsOverviewSection'},
+  {type: 'introTextSection'},
+  {type: 'featuresGridSection'},
 ]
 
 export const pageBuilderField = () =>
