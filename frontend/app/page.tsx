@@ -56,11 +56,6 @@ export default async function Page() {
     <>
       <HeroSection nextRunDate={formatedDate} heroGallery={homePage?.heroGallery} />
       <PageBuilderPage page={homePage} />
-      {/* <RunsOverview runs={upcomingRuns} />
-        <div>
-        <RunList heading="Upcoming Runs" runs={upcomingRuns} />
-        <RunList heading="Past Runs" runs={pastRuns} />
-      </div> */}
     </>
   )
 }

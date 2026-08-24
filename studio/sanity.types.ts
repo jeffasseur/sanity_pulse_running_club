@@ -43,7 +43,7 @@ export type FeatureCardImage = {
 
 export type FeaturesGridSection = {
   _type: 'featuresGridSection'
-  heading: string
+  heading?: string
   cards?: Array<{
     image: FeatureCardImage
     heading: string

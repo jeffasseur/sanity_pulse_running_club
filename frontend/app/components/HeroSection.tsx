@@ -5,8 +5,17 @@ import {initCountdown} from '@/lib/initCountDown'
 import Button from '@/app/components/elements/Button'
 import Countdown from './HeroSection/Countdown'
 import SanityImage from '@/app/components/SanityImage'
+import {SanityImageAssetReference, SanityImageCrop, SanityImageHotspot} from '@/sanity.types'
 
-function sortHeroGalleryImages(heroGallery?: {asset: {_ref: string}; position: string}[]) {
+type HeroGalleryImage = {
+  asset: SanityImageAssetReference
+  media?: unknown
+  hotspot?: SanityImageHotspot
+  crop?: SanityImageCrop
+  _type: 'image'
+  _key: string
+}
+
   const imagePositions = [
     {
       position: 'top-[8%] right-[70%]',
@@ -24,19 +33,6 @@ function sortHeroGalleryImages(heroGallery?: {asset: {_ref: string}; position: s
       position: 'top-[25%] right-[30%]',
     },
   ]
-  if (!heroGallery) {
-    return
-  }
-
-  // merge positions from imagePositions into heroGallery based on index
-  heroGallery.forEach((image, index) => {
-    if (imagePositions[index]) {
-      image.position = imagePositions[index].position
-    }
-  })
-
-  return heroGallery
-}
 
 function HeadlineLine({
   visible,
@@ -67,7 +63,7 @@ export default function HeroSection({
   heroGallery,
 }: {
   nextRunDate?: string | null | undefined
-  heroGallery?: {asset: {_ref: string}; position: string}[]
+  heroGallery?: HeroGalleryImage[]
 }) {
   const [line1Visible, setLine1Visible] = React.useState(false)
   const [line2Visible, setLine2Visible] = React.useState(false)
@@ -82,7 +78,7 @@ export default function HeroSection({
   }, [])
 
   initCountdown()
-  const heroImages = sortHeroGalleryImages(heroGallery)
+  // const heroImages = sortHeroGalleryImages(heroGallery)
 
   return (
     <section className="relative flex h-screen flex-col items-start justify-end overflow-hidden bg-black text-white">
@@ -100,14 +96,14 @@ export default function HeroSection({
       </div>
 
       <div className="absolute inset-0">
-        {heroImages &&
-          heroImages.map((image, i) => (
+        {heroGallery &&
+          heroGallery.map((image, i) => (
             <SanityImage
-              id={image.asset._ref || ''}
+              id={image?.asset._ref || ''}
               key={i}
               role="presentation"
               loading="lazy"
-              className={`absolute opacity-70 h-35 w-35 rounded-sm object-cover transition-all duration-700 ease-out sm:h-47.5 sm:w-47.5 lg:h-64 lg:w-64 ${image.position && image.position}`}
+              className={`absolute opacity-70 h-35 w-35 rounded-sm object-cover transition-all duration-700 ease-out sm:h-47.5 sm:w-47.5 lg:h-64 lg:w-64 ${imagePositions[i]?.position || ''}`}
               style={{
                 transitionDelay: `${i * 120 + 300}ms`,
               }}

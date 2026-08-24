@@ -150,7 +150,7 @@
           "value": {
             "type": "string"
           },
-          "optional": false
+          "optional": true
         },
         "cards": {
           "type": "objectAttribute",
