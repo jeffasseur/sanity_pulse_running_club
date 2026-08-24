@@ -15,6 +15,58 @@
 export declare const internalGroqTypeReferenceTo: unique symbol
 
 // Source: ../sanity.schema.json
+export type RunsOverviewSectionButton = {
+  text?: string
+  link?: Link
+}
+
+export type Cta = {
+  boldText?: string
+  bodyText?: string
+  button?: Button
+}
+
+export type SanityImageAssetReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+}
+
+export type FeatureCardImage = {
+  asset?: SanityImageAssetReference
+  media?: unknown // Unable to locate the referenced type "featureCard.image.media" in schema
+  hotspot?: SanityImageHotspot
+  crop?: SanityImageCrop
+  _type: 'image'
+}
+
+export type FeaturesGridSection = {
+  _type: 'featuresGridSection'
+  heading: string
+  cards?: Array<{
+    image: FeatureCardImage
+    heading: string
+    body?: string
+    _type: 'featureCard'
+    _key: string
+  }>
+  cta?: Cta
+}
+
+export type IntroTextSection = {
+  _type: 'introTextSection'
+  quote: string
+}
+
+export type RunsOverviewSection = {
+  _type: 'runsOverviewSection'
+  eyebrow?: string
+  heading?: string
+  button?: RunsOverviewSectionButton
+  runs?: 'upcomingRuns' | 'pastRuns' | 'allRuns'
+}
+
 export type PageReference = {
   _ref: string
   _type: 'reference'
@@ -38,11 +90,24 @@ export type Link = {
   openInNewTab?: boolean
 }
 
-export type SanityImageAssetReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+export type HeroAbout = {
+  _type: 'heroAbout'
+  heading: string
+  subheading?: string
+  images?: Array<{
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+    _key: string
+  }>
+  stats?: Array<{
+    value: string
+    label: string
+    _type: 'stat'
+    _key: string
+  }>
 }
 
 export type CallToAction = {
@@ -127,6 +192,154 @@ export type Button = {
   link?: Link
 }
 
+export type Faq = {
+  _id: string
+  _type: 'faq'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  question: string
+  answer: BlockContent
+  category?: string
+  orderRank?: string
+}
+
+export type LocationReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'location'
+}
+
+export type Run = {
+  _id: string
+  _type: 'run'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title: string
+  slug: Slug
+  description?: string
+  image?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  location?: LocationReference
+  date?: string
+  distance?: number
+  pace?: string
+}
+
+export type SanityImageCrop = {
+  _type: 'sanity.imageCrop'
+  top: number
+  bottom: number
+  left: number
+  right: number
+}
+
+export type SanityImageHotspot = {
+  _type: 'sanity.imageHotspot'
+  x: number
+  y: number
+  height: number
+  width: number
+}
+
+export type Slug = {
+  _type: 'slug'
+  current: string
+  source?: string
+}
+
+export type Location = {
+  _id: string
+  _type: 'location'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  name: string
+  address?: string
+  latitude?: number
+  longitude?: number
+}
+
+export type RunReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'run'
+}
+
+export type HomePage = {
+  _id: string
+  _type: 'homePage'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title: string
+  subtitle?: string
+  pageBuilder?: Array<
+    | ({
+        _key: string
+      } & CallToAction)
+    | ({
+        _key: string
+      } & InfoSection)
+    | ({
+        _key: string
+      } & HeroAbout)
+    | ({
+        _key: string
+      } & RunsOverviewSection)
+    | ({
+        _key: string
+      } & IntroTextSection)
+    | ({
+        _key: string
+      } & FeaturesGridSection)
+  >
+  heroGallery?: Array<{
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+    _key: string
+  }>
+  featuredRuns?: Array<
+    {
+      _key: string
+    } & RunReference
+  >
+  ogImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
+}
+
+export type Navigation = {
+  _id: string
+  _type: 'navigation'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  items?: Array<{
+    label?: string
+    link: Link
+    _type: 'item'
+    _key: string
+  }>
+}
+
 export type Settings = {
   _id: string
   _type: 'settings'
@@ -167,22 +380,6 @@ export type Settings = {
   }
 }
 
-export type SanityImageCrop = {
-  _type: 'sanity.imageCrop'
-  top: number
-  bottom: number
-  left: number
-  right: number
-}
-
-export type SanityImageHotspot = {
-  _type: 'sanity.imageHotspot'
-  x: number
-  y: number
-  height: number
-  width: number
-}
-
 export type Page = {
   _id: string
   _type: 'page'
@@ -200,6 +397,18 @@ export type Page = {
     | ({
         _key: string
       } & InfoSection)
+    | ({
+        _key: string
+      } & HeroAbout)
+    | ({
+        _key: string
+      } & RunsOverviewSection)
+    | ({
+        _key: string
+      } & IntroTextSection)
+    | ({
+        _key: string
+      } & FeaturesGridSection)
   >
 }
 
@@ -248,12 +457,6 @@ export type Person = {
     alt?: string
     _type: 'image'
   }
-}
-
-export type Slug = {
-  _type: 'slug'
-  current: string
-  source?: string
 }
 
 export type SanityAssistInstructionTask = {
@@ -491,23 +694,37 @@ export type Geopoint = {
 }
 
 export type AllSanitySchemaTypes =
+  | RunsOverviewSectionButton
+  | Cta
+  | SanityImageAssetReference
+  | FeatureCardImage
+  | FeaturesGridSection
+  | IntroTextSection
+  | RunsOverviewSection
   | PageReference
   | PostReference
   | Link
-  | SanityImageAssetReference
+  | HeroAbout
   | CallToAction
   | InfoSection
   | BlockContentTextOnly
   | BlockContent
   | Button
-  | Settings
+  | Faq
+  | LocationReference
+  | Run
   | SanityImageCrop
   | SanityImageHotspot
+  | Slug
+  | Location
+  | RunReference
+  | HomePage
+  | Navigation
+  | Settings
   | Page
   | PersonReference
   | Post
   | Person
-  | Slug
   | SanityAssistInstructionTask
   | SanityAssistTaskStatus
   | SanityAssistSchemaTypeAnnotations
@@ -574,8 +791,33 @@ export type SettingsQueryResult = {
 } | null
 
 // Source: sanity/lib/queries.ts
+// Variable: navigationQuery
+// Query: *[_type == "navigation"][0] {    ...,    items[]{      ...,        link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }    }  }
+export type NavigationQueryResult = {
+  _id: string
+  _type: 'navigation'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  items: Array<{
+    label?: string
+    link: {
+      _type: 'link'
+      linkType?: 'href' | 'page' | 'post'
+      href?: string
+      page: string | null
+      post: string | null
+      openInNewTab?: boolean
+    }
+    _type: 'item'
+    _key: string
+  }> | null
+} | null
+
+// Source: sanity/lib/queries.ts
 // Variable: getPageQuery
-// Query: *[_type == 'page' && slug.current == $slug][0]{    _id,    _type,    name,    slug,    heading,    subheading,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {        ...,        button {          ...,            link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }        }      },      _type == "infoSection" => {        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }          }        }      },    },  }
+// Query: *[_type == 'page' && slug.current == $slug][0]{    _id,    _type,    name,    slug,    heading,    subheading,    "pageBuilder": pageBuilder[]{        ...,  _type == "callToAction" => {    ...,    button {      ...,        link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }    }  },  _type == "infoSection" => {    content[]{      ...,      markDefs[]{        ...,          _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }    }  },  _type == "featuresGridSection" => {    ...,    cta {      ...,      button {        ...,          link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }      }    }  },    },  }
 export type GetPageQueryResult = {
   _id: string
   _type: 'page'
@@ -611,6 +853,54 @@ export type GetPageQueryResult = {
         }
         theme?: 'dark' | 'light'
         contentAlignment?: 'imageFirst' | 'textFirst'
+      }
+    | {
+        _key: string
+        _type: 'featuresGridSection'
+        heading: string
+        cards?: Array<{
+          image: FeatureCardImage
+          heading: string
+          body?: string
+          _type: 'featureCard'
+          _key: string
+        }>
+        cta: {
+          boldText?: string
+          bodyText?: string
+          button: {
+            _type: 'button'
+            buttonText?: string
+            link: {
+              _type: 'link'
+              linkType?: 'href' | 'page' | 'post'
+              href?: string
+              page: string | null
+              post: string | null
+              openInNewTab?: boolean
+            } | null
+          } | null
+        } | null
+      }
+    | {
+        _key: string
+        _type: 'heroAbout'
+        heading: string
+        subheading?: string
+        images?: Array<{
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+          _key: string
+        }>
+        stats?: Array<{
+          value: string
+          label: string
+          _type: 'stat'
+          _key: string
+        }>
       }
     | {
         _key: string
@@ -651,12 +941,25 @@ export type GetPageQueryResult = {
             }
         > | null
       }
+    | {
+        _key: string
+        _type: 'introTextSection'
+        quote: string
+      }
+    | {
+        _key: string
+        _type: 'runsOverviewSection'
+        eyebrow?: string
+        heading?: string
+        button?: RunsOverviewSectionButton
+        runs?: 'allRuns' | 'pastRuns' | 'upcomingRuns'
+      }
   > | null
 } | null
 
 // Source: sanity/lib/queries.ts
 // Variable: sitemapData
-// Query: *[_type == "page" || _type == "post" && defined(slug.current)] | order(_type asc) {    "slug": slug.current,    _type,    _updatedAt,  }
+// Query: *[(_type == "page" || _type == "post" || _type == "run") && defined(slug.current)] | order(_type asc) {    "slug": slug.current,    _type,    _updatedAt,  }
 export type SitemapDataResult = Array<
   | {
       slug: string
@@ -666,6 +969,11 @@ export type SitemapDataResult = Array<
   | {
       slug: string
       _type: 'post'
+      _updatedAt: string
+    }
+  | {
+      slug: string
+      _type: 'run'
       _updatedAt: string
     }
 >
@@ -813,17 +1121,167 @@ export type PagesSlugsResult = Array<{
   slug: string
 }>
 
+// Source: sanity/lib/queries.ts
+// Variable: upcomingRunsQuery
+// Query: *[_type == "run" && defined(slug.current) && defined(date) && date >= now()] | order(date asc) {      _id,  title,  "slug": slug.current,  description,  image,  "location": location->{name, address},  date,  distance,  pace,  }
+export type UpcomingRunsQueryResult = Array<{
+  _id: string
+  title: string
+  slug: string
+  description: string | null
+  image: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  } | null
+  location: {
+    name: string
+    address: string | null
+  } | null
+  date: string | null
+  distance: number | null
+  pace: string | null
+}>
+
+// Source: sanity/lib/queries.ts
+// Variable: pastRunsQuery
+// Query: *[_type == "run" && defined(slug.current) && defined(date) && date < now()] | order(date desc) {      _id,  title,  "slug": slug.current,  description,  image,  "location": location->{name, address},  date,  distance,  pace,  }
+export type PastRunsQueryResult = Array<{
+  _id: string
+  title: string
+  slug: string
+  description: string | null
+  image: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  } | null
+  location: {
+    name: string
+    address: string | null
+  } | null
+  date: string | null
+  distance: number | null
+  pace: string | null
+}>
+
+// Source: sanity/lib/queries.ts
+// Variable: runQuery
+// Query: *[_type == "run" && slug.current == $slug] [0] {      _id,  title,  "slug": slug.current,  description,  image,  "location": location->{name, address},  date,  distance,  pace,  }
+export type RunQueryResult = {
+  _id: string
+  title: string
+  slug: string
+  description: string | null
+  image: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  } | null
+  location: {
+    name: string
+    address: string | null
+  } | null
+  date: string | null
+  distance: number | null
+  pace: string | null
+} | null
+
+// Source: sanity/lib/queries.ts
+// Variable: runPagesSlugs
+// Query: *[_type == "run" && defined(slug.current)]  {"slug": slug.current}
+export type RunPagesSlugsResult = Array<{
+  slug: string
+}>
+
+// Source: sanity/lib/queries.ts
+// Variable: faqsQuery
+// Query: *[_type == "faq"] | order(orderRank asc) {    _id,    question,    answer,    category,  }
+export type FaqsQueryResult = Array<{
+  _id: string
+  question: string
+  answer: BlockContent
+  category: string | null
+}>
+
+// Source: sanity/lib/queries.ts
+// Variable: homePageQuery
+// Query: *[_type == "homePage"][0]{    _id,    _type,    title,    subtitle,    "pageBuilder": pageBuilder[]{        ...,  _type == "callToAction" => {    ...,    button {      ...,        link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }    }  },  _type == "infoSection" => {    content[]{      ...,      markDefs[]{        ...,          _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }    }  },  _type == "featuresGridSection" => {    ...,    cta {      ...,      button {        ...,          link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }      }    }  },    },    "featuredRuns": featuredRuns[]->{        _id,  title,  "slug": slug.current,  description,  image,  "location": location->{name, address},  date,  distance,  pace,    },    ogImage,    ...  }
+export type HomePageQueryResult = {
+  _id: string
+  _type: 'homePage'
+  title: string
+  subtitle?: string
+  pageBuilder?: Array<
+    | ({
+        _key: string
+      } & CallToAction)
+    | ({
+        _key: string
+      } & FeaturesGridSection)
+    | ({
+        _key: string
+      } & HeroAbout)
+    | ({
+        _key: string
+      } & InfoSection)
+    | ({
+        _key: string
+      } & IntroTextSection)
+    | ({
+        _key: string
+      } & RunsOverviewSection)
+  >
+  featuredRuns?: Array<
+    {
+      _key: string
+    } & RunReference
+  >
+  ogImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  heroGallery?: Array<{
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+    _key: string
+  }>
+} | null
+
 // Query TypeMap
 import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
     '*[_type == "settings"][0]': SettingsQueryResult
-    '\n  *[_type == \'page\' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    heading,\n    subheading,\n    "pageBuilder": pageBuilder[]{\n      ...,\n      _type == "callToAction" => {\n        ...,\n        button {\n          ...,\n          \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n        }\n      },\n      _type == "infoSection" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n          }\n        }\n      },\n    },\n  }\n': GetPageQueryResult
-    '\n  *[_type == "page" || _type == "post" && defined(slug.current)] | order(_type asc) {\n    "slug": slug.current,\n    _type,\n    _updatedAt,\n  }\n': SitemapDataResult
+    '*[_type == "navigation"][0] {\n    ...,\n    items[]{\n      ...,\n      \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n    }\n  }\n': NavigationQueryResult
+    '\n  *[_type == \'page\' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    heading,\n    subheading,\n    "pageBuilder": pageBuilder[]{\n      \n  ...,\n  _type == "callToAction" => {\n    ...,\n    button {\n      ...,\n      \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n    }\n  },\n  _type == "infoSection" => {\n    content[]{\n      ...,\n      markDefs[]{\n        ...,\n        \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n    }\n  },\n  _type == "featuresGridSection" => {\n    ...,\n    cta {\n      ...,\n      button {\n        ...,\n        \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n      }\n    }\n  },\n\n    },\n  }\n': GetPageQueryResult
+    '\n  *[(_type == "page" || _type == "post" || _type == "run") && defined(slug.current)] | order(_type asc) {\n    "slug": slug.current,\n    _type,\n    _updatedAt,\n  }\n': SitemapDataResult
     '\n  *[_type == "post" && defined(slug.current)] | order(date desc, _updatedAt desc) {\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage,\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  }\n': AllPostsQueryResult
     '\n  *[_type == "post" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage,\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  }\n': MorePostsQueryResult
     '\n  *[_type == "post" && slug.current == $slug] [0] {\n    content[]{\n    ...,\n    markDefs[]{\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n    }\n  },\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage,\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  }\n': PostQueryResult
     '\n  *[_type == "post" && defined(slug.current)]\n  {"slug": slug.current}\n': PostPagesSlugsResult
     '\n  *[_type == "page" && defined(slug.current)]\n  {"slug": slug.current}\n': PagesSlugsResult
+    '\n  *[_type == "run" && defined(slug.current) && defined(date) && date >= now()] | order(date asc) {\n    \n  _id,\n  title,\n  "slug": slug.current,\n  description,\n  image,\n  "location": location->{name, address},\n  date,\n  distance,\n  pace,\n\n  }\n': UpcomingRunsQueryResult
+    '\n  *[_type == "run" && defined(slug.current) && defined(date) && date < now()] | order(date desc) {\n    \n  _id,\n  title,\n  "slug": slug.current,\n  description,\n  image,\n  "location": location->{name, address},\n  date,\n  distance,\n  pace,\n\n  }\n': PastRunsQueryResult
+    '\n  *[_type == "run" && slug.current == $slug] [0] {\n    \n  _id,\n  title,\n  "slug": slug.current,\n  description,\n  image,\n  "location": location->{name, address},\n  date,\n  distance,\n  pace,\n\n  }\n': RunQueryResult
+    '\n  *[_type == "run" && defined(slug.current)]\n  {"slug": slug.current}\n': RunPagesSlugsResult
+    '\n  *[_type == "faq"] | order(orderRank asc) {\n    _id,\n    question,\n    answer,\n    category,\n  }\n': FaqsQueryResult
+    '\n  *[_type == "homePage"][0]{\n    _id,\n    _type,\n    title,\n    subtitle,\n    "pageBuilder": pageBuilder[]{\n      \n  ...,\n  _type == "callToAction" => {\n    ...,\n    button {\n      ...,\n      \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n    }\n  },\n  _type == "infoSection" => {\n    content[]{\n      ...,\n      markDefs[]{\n        ...,\n        \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n    }\n  },\n  _type == "featuresGridSection" => {\n    ...,\n    cta {\n      ...,\n      button {\n        ...,\n        \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n      }\n    }\n  },\n\n    },\n    "featuredRuns": featuredRuns[]->{\n      \n  _id,\n  title,\n  "slug": slug.current,\n  description,\n  image,\n  "location": location->{name, address},\n  date,\n  distance,\n  pace,\n\n    },\n    ogImage,\n    ...\n  }\n': HomePageQueryResult
   }
 }
