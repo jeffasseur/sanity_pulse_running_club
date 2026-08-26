@@ -1256,51 +1256,163 @@ export type FaqsQueryResult = Array<{
 
 // Source: sanity/lib/queries.ts
 // Variable: homePageQuery
-// Query: *[_type == "homePage"][0]{    _id,    _type,    title,    subtitle,    "pageBuilder": pageBuilder[]{        ...,  _type == "callToAction" => {    ...,    button {      ...,        link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }    }  },  _type == "infoSection" => {    content[]{      ...,      markDefs[]{        ...,          _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }    }  },  _type == "featuresGridSection" => {    ...,    cta {      ...,      button {        ...,          link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }      }    }  },    },    "featuredRuns": featuredRuns[]->{        _id,  title,  "slug": slug.current,  description,  image,  "location": location->{name, address},  date,  distance,  pace,    },    ogImage,    ...  }
+// Query: *[_type == "homePage"][0]{    ...,    _id,    _type,    title,    subtitle,    "pageBuilder": pageBuilder[]{        ...,  _type == "callToAction" => {    ...,    button {      ...,        link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }    }  },  _type == "infoSection" => {    content[]{      ...,      markDefs[]{        ...,          _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }    }  },  _type == "featuresGridSection" => {    ...,    cta {      ...,      button {        ...,          link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }      }    }  },    },    "featuredRuns": featuredRuns[]->{        _id,  title,  "slug": slug.current,  description,  image,  "location": location->{name, address},  date,  distance,  pace,    },    ogImage,  }
 export type HomePageQueryResult = {
   _id: string
   _type: 'homePage'
-  title: string
-  subtitle?: string
-  pageBuilder?: Array<
-    | ({
-        _key: string
-      } & CallToAction)
-    | ({
-        _key: string
-      } & FeaturesGridSection)
-    | ({
-        _key: string
-      } & HeroAbout)
-    | ({
-        _key: string
-      } & InfoSection)
-    | ({
-        _key: string
-      } & IntroTextSection)
-    | ({
-        _key: string
-      } & RunsOverviewSection)
-    | ({
-        _key: string
-      } & TwoColsImageParallaxSection)
-  >
-  featuredRuns?: Array<
-    {
-      _key: string
-    } & RunReference
-  >
-  ogImage?: {
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    alt?: string
-    _type: 'image'
-  }
   _createdAt: string
   _updatedAt: string
   _rev: string
+  title: string
+  subtitle: string | null
+  pageBuilder: Array<
+    | {
+        _key: string
+        _type: 'callToAction'
+        eyebrow?: string
+        heading: string
+        body?: BlockContentTextOnly
+        button: {
+          _type: 'button'
+          buttonText?: string
+          link: {
+            _type: 'link'
+            linkType?: 'href' | 'page' | 'post'
+            href?: string
+            page: string | null
+            post: string | null
+            openInNewTab?: boolean
+          } | null
+        } | null
+        image?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
+        theme?: 'dark' | 'light'
+        contentAlignment?: 'imageFirst' | 'textFirst'
+      }
+    | {
+        _key: string
+        _type: 'featuresGridSection'
+        heading?: string
+        cards?: Array<{
+          image: FeatureCardImage
+          heading: string
+          body?: string
+          _type: 'featureCard'
+          _key: string
+        }>
+        cta: {
+          boldText?: string
+          bodyText?: string
+          button: {
+            _type: 'button'
+            buttonText?: string
+            link: {
+              _type: 'link'
+              linkType?: 'href' | 'page' | 'post'
+              href?: string
+              page: string | null
+              post: string | null
+              openInNewTab?: boolean
+            } | null
+          } | null
+        } | null
+      }
+    | {
+        _key: string
+        _type: 'heroAbout'
+        heading: string
+        subheading?: string
+        images?: Array<{
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+          _key: string
+        }>
+        stats?: Array<{
+          value: string
+          label: string
+          _type: 'stat'
+          _key: string
+        }>
+      }
+    | {
+        _key: string
+        _type: 'infoSection'
+        heading?: string
+        subheading?: string
+        content: Array<
+          | {
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
+              listItem?: 'bullet' | 'number'
+              markDefs: Array<{
+                linkType?: 'href' | 'page' | 'post'
+                href?: string
+                page: string | null
+                post: string | null
+                openInNewTab?: boolean
+                _type: 'link'
+                _key: string
+              }> | null
+              level?: number
+              _type: 'block'
+              _key: string
+            }
+          | {
+              asset?: SanityImageAssetReference
+              media?: unknown
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              _type: 'image'
+              _key: string
+              markDefs: null
+            }
+        > | null
+      }
+    | {
+        _key: string
+        _type: 'introTextSection'
+        quote: string
+      }
+    | {
+        _key: string
+        _type: 'runsOverviewSection'
+        eyebrow?: string
+        heading?: string
+        button?: RunsOverviewSectionButton
+        runs?: 'allRuns' | 'pastRuns' | 'upcomingRuns'
+      }
+    | {
+        _key: string
+        _type: 'twoColsImageParallaxSection'
+        imageLeft?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
+        imageRight?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
+      }
+  > | null
   enableHeroGallery?: boolean
   heroGallery?: Array<{
     asset?: SanityImageAssetReference
@@ -1310,6 +1422,34 @@ export type HomePageQueryResult = {
     _type: 'image'
     _key: string
   }>
+  featuredRuns: Array<{
+    _id: string
+    title: string
+    slug: string
+    description: string | null
+    image: {
+      asset?: SanityImageAssetReference
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      _type: 'image'
+    } | null
+    location: {
+      name: string
+      address: string | null
+    } | null
+    date: string | null
+    distance: number | null
+    pace: string | null
+  }> | null
+  ogImage: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  } | null
 } | null
 
 // Query TypeMap
@@ -1330,6 +1470,6 @@ declare module '@sanity/client' {
     '\n  *[_type == "run" && slug.current == $slug] [0] {\n    \n  _id,\n  title,\n  "slug": slug.current,\n  description,\n  image,\n  "location": location->{name, address},\n  date,\n  distance,\n  pace,\n\n  }\n': RunQueryResult
     '\n  *[_type == "run" && defined(slug.current)]\n  {"slug": slug.current}\n': RunPagesSlugsResult
     '\n  *[_type == "faq"] | order(orderRank asc) {\n    _id,\n    question,\n    answer,\n    category,\n  }\n': FaqsQueryResult
-    '\n  *[_type == "homePage"][0]{\n    _id,\n    _type,\n    title,\n    subtitle,\n    "pageBuilder": pageBuilder[]{\n      \n  ...,\n  _type == "callToAction" => {\n    ...,\n    button {\n      ...,\n      \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n    }\n  },\n  _type == "infoSection" => {\n    content[]{\n      ...,\n      markDefs[]{\n        ...,\n        \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n    }\n  },\n  _type == "featuresGridSection" => {\n    ...,\n    cta {\n      ...,\n      button {\n        ...,\n        \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n      }\n    }\n  },\n\n    },\n    "featuredRuns": featuredRuns[]->{\n      \n  _id,\n  title,\n  "slug": slug.current,\n  description,\n  image,\n  "location": location->{name, address},\n  date,\n  distance,\n  pace,\n\n    },\n    ogImage,\n    ...\n  }\n': HomePageQueryResult
+    '\n  *[_type == "homePage"][0]{\n    ...,\n    _id,\n    _type,\n    title,\n    subtitle,\n    "pageBuilder": pageBuilder[]{\n      \n  ...,\n  _type == "callToAction" => {\n    ...,\n    button {\n      ...,\n      \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n    }\n  },\n  _type == "infoSection" => {\n    content[]{\n      ...,\n      markDefs[]{\n        ...,\n        \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n    }\n  },\n  _type == "featuresGridSection" => {\n    ...,\n    cta {\n      ...,\n      button {\n        ...,\n        \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n      }\n    }\n  },\n\n    },\n    "featuredRuns": featuredRuns[]->{\n      \n  _id,\n  title,\n  "slug": slug.current,\n  description,\n  image,\n  "location": location->{name, address},\n  date,\n  distance,\n  pace,\n\n    },\n    ogImage,\n  }\n': HomePageQueryResult
   }
 }

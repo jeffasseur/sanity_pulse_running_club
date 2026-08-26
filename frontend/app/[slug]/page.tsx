@@ -41,7 +41,9 @@ export async function generateMetadata(props: PageProps<'/[slug]'>): Promise<Met
 
 export default async function Page(props: PageProps<'/[slug]'>) {
   const params = await props.params
-  const [{data: page}] = await Promise.all([sanityFetch({query: getPageQuery, params})])
+  const [{data: page}] = await Promise.all([
+    sanityFetch({query: getPageQuery, params, stega: false}),
+  ])
 
   if (!page?._id) {
     return (

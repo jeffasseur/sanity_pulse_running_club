@@ -171,6 +171,7 @@ export const faqsQuery = defineQuery(`
 
 export const homePageQuery = defineQuery(`
   *[_type == "homePage"][0]{
+    ...,
     _id,
     _type,
     title,
@@ -182,6 +183,5 @@ export const homePageQuery = defineQuery(`
       ${runFields}
     },
     ogImage,
-    ...
   }
 `)

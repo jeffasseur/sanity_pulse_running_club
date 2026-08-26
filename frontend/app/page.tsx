@@ -32,7 +32,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
-  const [{data: homePage}] = await Promise.all([sanityFetch({query: homePageQuery})])
+  const [{data: homePage}] = await Promise.all([
+    sanityFetch({query: homePageQuery, stega: false}),
+  ])
   // @ts-expect-error - nextRunDate is not used in this file, but is passed to HeroSection
   const {data: date}: {data: nextRunDateType | null} = await sanityFetch({
     query: `*[_type == "run" && date >= now()] | order(date asc)[0]{

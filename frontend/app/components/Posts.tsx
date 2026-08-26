@@ -59,6 +59,7 @@ export const MorePosts = async ({skip, limit}: {skip: string; limit: number}) =>
   const {data} = await sanityFetch({
     query: morePostsQuery,
     params: {skip, limit},
+    stega: false,
   })
 
   if (!data || data.length === 0) {
@@ -75,7 +76,7 @@ export const MorePosts = async ({skip, limit}: {skip: string; limit: number}) =>
 }
 
 export const AllPosts = async () => {
-  const {data} = await sanityFetch({query: allPostsQuery})
+  const {data} = await sanityFetch({query: allPostsQuery, stega: false})
 
   if (!data || data.length === 0) {
     return <OnBoarding />
