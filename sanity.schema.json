@@ -1811,6 +1811,13 @@
         },
         "optional": true
       },
+      "enableHeroGallery": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "boolean"
+        },
+        "optional": true
+      },
       "heroGallery": {
         "type": "objectAttribute",
         "value": {

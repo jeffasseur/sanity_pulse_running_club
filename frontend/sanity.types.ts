@@ -302,6 +302,7 @@ export type HomePage = {
         _key: string
       } & FeaturesGridSection)
   >
+  enableHeroGallery?: boolean
   heroGallery?: Array<{
     asset?: SanityImageAssetReference
     media?: unknown
@@ -1254,6 +1255,7 @@ export type HomePageQueryResult = {
   _createdAt: string
   _updatedAt: string
   _rev: string
+  enableHeroGallery?: boolean
   heroGallery?: Array<{
     asset?: SanityImageAssetReference
     media?: unknown

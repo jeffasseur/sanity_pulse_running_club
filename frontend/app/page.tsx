@@ -6,6 +6,7 @@ import PageBuilderPage from '@/app/components/PageBuilder'
 import {sanityFetch} from '@/sanity/lib/live'
 import {homePageQuery} from '@/sanity/lib/queries'
 import {resolveOpenGraphImage} from '@/sanity/lib/utils'
+import TwoColsImageParallaxSection from './components/TwoColsImageParallaxSection'
 
 type nextRunDateType = {
   date: string
@@ -55,6 +56,7 @@ export default async function Page() {
   return (
     <>
       <HeroSection nextRunDate={formatedDate} heroGallery={homePage?.heroGallery} />
+      <TwoColsImageParallaxSection />
       <PageBuilderPage page={homePage} />
     </>
   )

@@ -124,7 +124,7 @@ export default function FeaturesGridSection({block}: FeaturesGridSectionProps) {
         )}
 
         {cards.length > 0 && (
-          <div className="mb-16 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:mb-20 lg:grid-cols-3">
+          <div className="mb-16 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:mb-20 lg:grid-cols-3 p-4 bg-gray-900 rounded-md">
             {cards.map((card, i) => (
               <FeatureCardTile key={card._key} card={card} delay={i * 120} />
             ))}
