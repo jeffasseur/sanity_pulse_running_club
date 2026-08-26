@@ -163,8 +163,8 @@ export default function Footer() {
                 borderRadius: '3px',
                 backgroundImage: "url('https://badges.strava.com/logo-strava-echelon.png')",
               }}
-              href="https://strava.com/athletes/7899663"
-              target="_clean"
+              href="https://www.strava.com/clubs/1778757"
+              target="_blank"
             >
               Volg mij via
               <Image
