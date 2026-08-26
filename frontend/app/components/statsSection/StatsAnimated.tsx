@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import Button from '../elements/Button'
 
 function useInView<T extends HTMLElement>() {
   const ref = React.useRef<T>(null)
@@ -123,7 +124,9 @@ export default function StatsAnimated({
               <div ref={labelRef} className={`w-fit ${fadeUp(labelInView)}`}>
                 <div className="inline-flex items-center gap-2">
                   <span className="h-2 w-2 flex-none rounded-sm bg-brand" />
-                  <span className="font-mono text-xs uppercase tracking-widest text-white">{eyebrow}</span>
+                  <span className="font-mono text-xs uppercase tracking-widest text-white">
+                    {eyebrow}
+                  </span>
                 </div>
               </div>
             )}
@@ -152,6 +155,14 @@ export default function StatsAnimated({
               ))}
             </div>
           )}
+
+          <div className="flex justify-start">
+            <Button
+              href="https://strava.com/clubs/1778757"
+              text="Join our Strava club"
+              target="_blank"
+            />
+          </div>
         </div>
 
         <BarsSection />
