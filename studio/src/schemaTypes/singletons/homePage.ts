@@ -28,6 +28,13 @@ export const homePage = defineType({
     }),
     pageBuilderField(),
     defineField({
+      name: 'enableHeroGallery',
+      title: 'Enable Hero Gallery',
+      description: 'Toggle to enable or disable the hero gallery on the homepage.',
+      type: 'boolean',
+      initialValue: false,
+    }),
+    defineField({
       name: 'heroGallery',
       title: 'Hero Gallery',
       description: 'Images to display in the hero section of the homepage.',

@@ -59,40 +59,49 @@ function HeadlineLine({
 
 export default function HeroSection({
   nextRunDate,
+  enableHeroGallery = false,
   heroGallery,
 }: {
   nextRunDate?: string | null | undefined
+  enableHeroGallery?: boolean
   heroGallery?: HeroGalleryImage[]
 }) {
   const [line1Visible, setLine1Visible] = React.useState(false)
-  const [line2Visible, setLine2Visible] = React.useState(false)
+  // const [line2Visible, setLine2Visible] = React.useState(false)
 
   React.useEffect(() => {
     const timer1 = setTimeout(() => setLine1Visible(true), 100)
-    const timer2 = setTimeout(() => setLine2Visible(true), 250)
+    // const timer2 = setTimeout(() => setLine2Visible(true), 250)
     return () => {
       clearTimeout(timer1)
-      clearTimeout(timer2)
+      // clearTimeout(timer2)
     }
   }, [])
 
   return (
-    <section className="relative flex h-screen flex-col items-start justify-end overflow-hidden bg-black text-white">
-      <div className="container relative z-10 pb-16 md:pb-20">
+    <header className="relative flex h-screen flex-col items-start justify-center overflow-hidden bg-black text-white">
+      <div className="container relative z-10 pb-16 mt-20 md:pb-20">
         <HeadlineLine visible={line1Visible} delayMs={0}>
-          Pulse <span className="italic">Running</span>
+          Pulse <span className="italic">Running</span> Club
         </HeadlineLine>
-        <HeadlineLine visible={line2Visible} delayMs={150}>
+        {/* <HeadlineLine visible={line2Visible} delayMs={150}>
           Club
-        </HeadlineLine>
+        </HeadlineLine> */}
         <Countdown nextRunDate={nextRunDate} />
         <div className="mt-6 flex justify-start">
-          <Button text="Join the club" />
+          <Button
+            text="Join the club"
+            href="https://www.strava.com/clubs/1778757"
+            target="_blank"
+          />
         </div>
       </div>
 
-      <div className="absolute inset-0">
-        {heroGallery &&
+      <div
+        className={`absolute inset-0 ${!enableHeroGallery ? 'bg-[url(/images/james-lee-_QvszySFByg-unsplash-p-1600.jpg)] bg-cover bg-center sm:block' : ''}`}
+      >
+        {enableHeroGallery &&
+          heroGallery &&
           heroGallery.map((image, i) => (
             <SanityImage
               id={image?.asset?._ref || ''}
@@ -106,6 +115,6 @@ export default function HeroSection({
             />
           ))}
       </div>
-    </section>
+    </header>
   )
 }

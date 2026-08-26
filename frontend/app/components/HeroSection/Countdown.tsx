@@ -20,14 +20,14 @@ export default function Countdown({nextRunDate}: CountdownProps) {
       data-countdown-date={nextRunDate}
       data-countdown-status="active"
       data-countdown-format="long"
-      className="flex gap-[0.75em] flex-wrap justify-left items-center max-w-full text-lg md:text-xl"
+      className="flex gap-2 flex-wrap justify-left items-center max-w-full text-lg md:text-xl"
     >
-      <p className="text-lg font-semibold ml-1 md:text-xl bg-white/10 backdrop-blur-md rounded-[0.125em] py-1 px-3 m-0 border border-[#2A2727]">
-        Next run
+      <p className="text-md font-semibold ml-1 md:text-lg backdrop-blur-md rounded-[0.125em] py-1 px-3 m-0 border border-[#2A2727]">
+        Next <span className="italic">run</span>
       </p>
       <p
         data-countdown-update="days"
-        className="bg-[#2A2727] rounded-[3em] py-1 px-3 m-0 border border-transparent"
+        className="bg-[#2A2727] rounded-full py-1 px-3 m-0 border border-transparent"
       >
         D
       </p>
@@ -39,7 +39,7 @@ export default function Countdown({nextRunDate}: CountdownProps) {
       </p>
       <p
         data-countdown-update="minutes"
-        className="bg-[#2A2727] rounded-[3em] py-1 px-3 m-0 border border-transparent"
+        className="bg-[#2A2727] rounded-full py-1 px-3 m-0 border border-transparent"
       >
         Min
       </p>

@@ -43,7 +43,7 @@ export type FeatureCardImage = {
 
 export type FeaturesGridSection = {
   _type: 'featuresGridSection'
-  heading: string
+  heading?: string
   cards?: Array<{
     image: FeatureCardImage
     heading: string
@@ -857,7 +857,7 @@ export type GetPageQueryResult = {
     | {
         _key: string
         _type: 'featuresGridSection'
-        heading: string
+        heading?: string
         cards?: Array<{
           image: FeatureCardImage
           heading: string
