@@ -2,6 +2,9 @@
 
 @plugin "@tailwindcss/typography";
 
+html::selection {
+  @apply bg-brand;
+}
 @layer base {
   h1,
   h2,
