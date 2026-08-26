@@ -44,15 +44,13 @@ const hiddenOnMobile = new Set([2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 
 
 const barNumbers = Array.from({length: 33}, (_, i) => i + 1)
 
-const statAccents = ['text-brand', 'text-blue']
-
 function BarsSection() {
   const [ref, inView] = useInView<HTMLDivElement>()
 
   return (
     <div
       ref={ref}
-      className="flex h-100 flex-row items-end justify-between gap-1.5 sm:gap-2 sm:-mt-25 md:mt-0 md:gap-3 lg:h-120 lg:-mt-25 lg:gap-4 xl:gap-6"
+      className="flex h-80 flex-row items-end justify-between gap-1.5 sm:gap-2 sm:-mt-25 md:mt-0 md:gap-3 lg:h-100 lg:-mt-32 lg:gap-4 xl:gap-6"
     >
       {barNumbers.map((num) => (
         <div
@@ -84,8 +82,10 @@ function StatTile({value, label, accent, delay}: {value: string; label: string; 
       style={{transitionDelay: `${delay}ms`}}
       className={`flex flex-col gap-4 ${fadeUp(inView)}`}
     >
-      <div className={`font-mono text-6xl font-medium tracking-tight lg:text-8xl ${accent}`}>{value}</div>
-      <div className="text-base text-gray-400">{label}</div>
+      <div className={`font-mono text-6xl font-medium tracking-tight lg:text-[5vw] ${accent}`}>
+        {value}
+      </div>
+      <div className="text-base md:text-lg text-white/80">{label}</div>
     </div>
   )
 }
@@ -104,21 +104,21 @@ export default function StatsAnimated({
 
   const statsDup = [
     {
-      label: 'Runners in the club',
-      value: '32',
+      label: 'Runners in de club',
+      value: '166+',
       accent: 'text-white',
     },
     {
       label: 'Distance logged recently',
       value: '123.4km',
       accent: 'text-brand',
-    }
+    },
   ]
 
   return (
     <section className="bg-black py-24 text-white lg:py-32">
       <div className="container">
-        <div className="flex max-w-170 flex-col gap-12 lg:gap-20">
+        <div className="flex max-w-170 flex-col gap-12 lg:gap-16">
           <div className="flex flex-col gap-6 lg:gap-8">
             {eyebrow && (
               <div ref={labelRef} className={`w-fit ${fadeUp(labelInView)}`}>
@@ -143,7 +143,7 @@ export default function StatsAnimated({
           </div>
 
           {statsDup.length > 0 && (
-            <div className="flex flex-col gap-8 sm:flex-row sm:gap-12">
+            <div className="flex flex-col gap-8 sm:flex-row sm:gap-16 lg:gap-24">
               {statsDup.map((stat, i) => (
                 <StatTile
                   key={stat.label}

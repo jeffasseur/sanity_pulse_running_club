@@ -30,7 +30,7 @@ type TokenCache = {accessToken: string; expiresAt: number}
 
 let tokenCache: TokenCache | null = null
 
-async function getAccessToken(): Promise<string> {
+async function getAccessToken(): Promise<string | null> {
   const now = Math.floor(Date.now() / 1000)
   if (tokenCache && tokenCache.expiresAt - 300 > now) {
     return tokenCache.accessToken
@@ -41,6 +41,7 @@ async function getAccessToken(): Promise<string> {
   const refreshToken = process.env.STRAVA_REFRESH_TOKEN
 
   if (!clientId || !clientSecret || !refreshToken) {
+    return null;
     throw new Error(
       'Missing Strava credentials: set STRAVA_CLIENT_ID, STRAVA_CLIENT_SECRET and STRAVA_REFRESH_TOKEN',
     )
