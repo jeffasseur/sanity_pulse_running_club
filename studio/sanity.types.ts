@@ -41,6 +41,24 @@ export type FeatureCardImage = {
   _type: 'image'
 }
 
+export type TwoColsImageParallaxSection = {
+  _type: 'twoColsImageParallaxSection'
+  imageLeft?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  imageRight?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+}
+
 export type FeaturesGridSection = {
   _type: 'featuresGridSection'
   heading?: string
@@ -301,7 +319,11 @@ export type HomePage = {
     | ({
         _key: string
       } & FeaturesGridSection)
+    | ({
+        _key: string
+      } & TwoColsImageParallaxSection)
   >
+  enableHeroGallery?: boolean
   heroGallery?: Array<{
     asset?: SanityImageAssetReference
     media?: unknown
@@ -409,6 +431,9 @@ export type Page = {
     | ({
         _key: string
       } & FeaturesGridSection)
+    | ({
+        _key: string
+      } & TwoColsImageParallaxSection)
   >
 }
 
@@ -698,6 +723,7 @@ export type AllSanitySchemaTypes =
   | Cta
   | SanityImageAssetReference
   | FeatureCardImage
+  | TwoColsImageParallaxSection
   | FeaturesGridSection
   | IntroTextSection
   | RunsOverviewSection

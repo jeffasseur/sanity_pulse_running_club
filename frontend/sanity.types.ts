@@ -41,6 +41,24 @@ export type FeatureCardImage = {
   _type: 'image'
 }
 
+export type TwoColsImageParallaxSection = {
+  _type: 'twoColsImageParallaxSection'
+  imageLeft?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  imageRight?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+}
+
 export type FeaturesGridSection = {
   _type: 'featuresGridSection'
   heading?: string
@@ -301,6 +319,9 @@ export type HomePage = {
     | ({
         _key: string
       } & FeaturesGridSection)
+    | ({
+        _key: string
+      } & TwoColsImageParallaxSection)
   >
   enableHeroGallery?: boolean
   heroGallery?: Array<{
@@ -410,6 +431,9 @@ export type Page = {
     | ({
         _key: string
       } & FeaturesGridSection)
+    | ({
+        _key: string
+      } & TwoColsImageParallaxSection)
   >
 }
 
@@ -699,6 +723,7 @@ export type AllSanitySchemaTypes =
   | Cta
   | SanityImageAssetReference
   | FeatureCardImage
+  | TwoColsImageParallaxSection
   | FeaturesGridSection
   | IntroTextSection
   | RunsOverviewSection
@@ -954,6 +979,24 @@ export type GetPageQueryResult = {
         heading?: string
         button?: RunsOverviewSectionButton
         runs?: 'allRuns' | 'pastRuns' | 'upcomingRuns'
+      }
+    | {
+        _key: string
+        _type: 'twoColsImageParallaxSection'
+        imageLeft?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
+        imageRight?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
       }
   > | null
 } | null
@@ -1238,6 +1281,9 @@ export type HomePageQueryResult = {
     | ({
         _key: string
       } & RunsOverviewSection)
+    | ({
+        _key: string
+      } & TwoColsImageParallaxSection)
   >
   featuredRuns?: Array<
     {

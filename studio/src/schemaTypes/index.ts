@@ -17,6 +17,7 @@ import {faq} from './documents/faq'
 import { runsOverviewSection } from './objects/RunsOverviewSection'
 import {introTextSection} from './objects/introTextSection'
 import {featuresGridSection} from './objects/featuresGridSection'
+import { twoColsImageParallaxSection } from './objects/TwoColsImageParallaxSection'
 
 // Export an array of all the schema types.  This is used in the Sanity Studio configuration. https://www.sanity.io/docs/studio/schema-types
 
@@ -43,4 +44,5 @@ export const schemaTypes = [
   runsOverviewSection,
   introTextSection,
   featuresGridSection,
+  twoColsImageParallaxSection,
 ]

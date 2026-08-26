@@ -2,11 +2,9 @@ import type {Metadata} from 'next'
 
 import HeroSection from '@/app/components/HeroSection'
 import PageBuilderPage from '@/app/components/PageBuilder'
-// import {RunList} from '@/app/components/Runs'
 import {sanityFetch} from '@/sanity/lib/live'
 import {homePageQuery} from '@/sanity/lib/queries'
 import {resolveOpenGraphImage} from '@/sanity/lib/utils'
-import TwoColsImageParallaxSection from './components/TwoColsImageParallaxSection'
 
 type nextRunDateType = {
   date: string
@@ -44,6 +42,8 @@ export default async function Page() {
     stega: false,
   })
 
+  console.log('Home page data: ', homePage)
+
   if (!homePage?._id) {
     return <div>There went someting wrong</div>
   }
@@ -56,7 +56,6 @@ export default async function Page() {
   return (
     <>
       <HeroSection nextRunDate={formatedDate} heroGallery={homePage?.heroGallery} />
-      <TwoColsImageParallaxSection />
       <PageBuilderPage page={homePage} />
     </>
   )

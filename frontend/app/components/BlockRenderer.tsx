@@ -8,6 +8,7 @@ import IntroTextSection from '@/app/components/IntroTextSection'
 import {dataAttr} from '@/sanity/lib/utils'
 import {PageBuilderSection} from '@/sanity/lib/types'
 import RunsOverviewSection from './RunsOverviewSection'
+import TwoColsImageParallaxSection from './TwoColsImageParallaxSection'
 
 type BlockProps = {
   index: number
@@ -27,6 +28,7 @@ const Blocks = {
   runsOverviewSection: RunsOverviewSection,
   introTextSection: IntroTextSection,
   featuresGridSection: FeaturesGridSection,
+  twoColsImageParallaxSection: TwoColsImageParallaxSection,
 } as BlocksType
 
 /**
