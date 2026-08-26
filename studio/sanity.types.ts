@@ -41,6 +41,18 @@ export type FeatureCardImage = {
   _type: 'image'
 }
 
+export type StatsSection = {
+  _type: 'statsSection'
+  eyebrow?: string
+  heading?: string
+  stats?: Array<{
+    value: string
+    label: string
+    _type: 'stat'
+    _key: string
+  }>
+}
+
 export type TwoColsImageParallaxSection = {
   _type: 'twoColsImageParallaxSection'
   imageLeft?: {
@@ -322,6 +334,9 @@ export type HomePage = {
     | ({
         _key: string
       } & TwoColsImageParallaxSection)
+    | ({
+        _key: string
+      } & StatsSection)
   >
   enableHeroGallery?: boolean
   heroGallery?: Array<{
@@ -434,6 +449,9 @@ export type Page = {
     | ({
         _key: string
       } & TwoColsImageParallaxSection)
+    | ({
+        _key: string
+      } & StatsSection)
   >
 }
 
@@ -723,6 +741,7 @@ export type AllSanitySchemaTypes =
   | Cta
   | SanityImageAssetReference
   | FeatureCardImage
+  | StatsSection
   | TwoColsImageParallaxSection
   | FeaturesGridSection
   | IntroTextSection

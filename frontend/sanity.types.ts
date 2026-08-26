@@ -41,6 +41,12 @@ export type FeatureCardImage = {
   _type: 'image'
 }
 
+export type StatsSection = {
+  _type: 'statsSection'
+  eyebrow?: string
+  heading?: string
+}
+
 export type TwoColsImageParallaxSection = {
   _type: 'twoColsImageParallaxSection'
   imageLeft?: {
@@ -322,6 +328,9 @@ export type HomePage = {
     | ({
         _key: string
       } & TwoColsImageParallaxSection)
+    | ({
+        _key: string
+      } & StatsSection)
   >
   enableHeroGallery?: boolean
   heroGallery?: Array<{
@@ -434,6 +443,9 @@ export type Page = {
     | ({
         _key: string
       } & TwoColsImageParallaxSection)
+    | ({
+        _key: string
+      } & StatsSection)
   >
 }
 
@@ -723,6 +735,7 @@ export type AllSanitySchemaTypes =
   | Cta
   | SanityImageAssetReference
   | FeatureCardImage
+  | StatsSection
   | TwoColsImageParallaxSection
   | FeaturesGridSection
   | IntroTextSection
@@ -979,6 +992,12 @@ export type GetPageQueryResult = {
         heading?: string
         button?: RunsOverviewSectionButton
         runs?: 'allRuns' | 'pastRuns' | 'upcomingRuns'
+      }
+    | {
+        _key: string
+        _type: 'statsSection'
+        eyebrow?: string
+        heading?: string
       }
     | {
         _key: string
@@ -1393,6 +1412,12 @@ export type HomePageQueryResult = {
         heading?: string
         button?: RunsOverviewSectionButton
         runs?: 'allRuns' | 'pastRuns' | 'upcomingRuns'
+      }
+    | {
+        _key: string
+        _type: 'statsSection'
+        eyebrow?: string
+        heading?: string
       }
     | {
         _key: string

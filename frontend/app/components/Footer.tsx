@@ -6,7 +6,7 @@ export default function Footer() {
           <div className="flex item-end justify-start md:justify-end flex-wrap gap-6">
             <a
               href="mailto:sayhi@pulserunning.be"
-              className="line-link-block footer-link w-inline-block"
+              className="line-link-block footer-link w-inline-block font-normal"
             >
               <div>sayhi@pulserunning.be</div>
               <div className="underline-link-master">
@@ -16,7 +16,7 @@ export default function Footer() {
             <a
               href="https://www.strava.com/clubs/1778757"
               target="_blank"
-              className="line-link-block footer-link w-inline-block"
+              className="line-link-block footer-link w-inline-block font-normal"
             >
               <div>Strava</div>
               <div className="underline-link-master">
@@ -26,7 +26,7 @@ export default function Footer() {
             <a
               href="https://www.instagram.com/pulse_runningclub/"
               target="_blank"
-              className="line-link-block footer-link w-inline-block"
+              className="line-link-block footer-link w-inline-block font-normal"
             >
               <div>Instagram</div>
               <div className="underline-link-master">
@@ -36,7 +36,7 @@ export default function Footer() {
             <a
               href="https://teamwear.runnerslab.be/nl/product/list/62189"
               target="_blank"
-              className="line-link-block footer-link w-inline-block"
+              className="line-link-block footer-link w-inline-block font-normal"
             >
               <div>Merchandise</div>
               <div className="underline-link-master">

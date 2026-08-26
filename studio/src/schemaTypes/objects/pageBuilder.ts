@@ -14,6 +14,7 @@ export const pageBuilderBlockTypes = [
   {type: 'introTextSection'},
   {type: 'featuresGridSection'},
   {type: 'twoColsImageParallaxSection'},
+  {type: 'statsSection'},
 ]
 
 export const pageBuilderField = () =>

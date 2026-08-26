@@ -44,8 +44,6 @@ export default async function Page() {
     stega: false,
   })
 
-  console.log('Home page data: ', homePage)
-
   if (!homePage?._id) {
     return <div>There went someting wrong</div>
   }
