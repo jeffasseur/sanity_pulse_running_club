@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 export default function Footer() {
   return (
     <footer className="pt-16 pb-5 text-xl font-medium">
@@ -137,11 +139,41 @@ export default function Footer() {
             </defs>
           </svg>
         </div>
-        <div className="flex mt-8 items-center justify-start gap-3">
+        <div className="flex mt-8 items-center justify-between gap-3">
           <div className="text-sm">
             Powered by{' '}
             <a href="https://jeffasseur.be" target="_blank" className="underline text-brand">
               JEF .FASSEUR
+            </a>
+          </div>
+          <div className="flex items-center gap-2">
+            <a
+              style={{
+                display: 'inline-flex',
+                gap: '4px',
+                backgroundColor: '#FC5200',
+                color: '#fff',
+                padding: '5px 10px 5px 30px',
+                fontSize: '11px',
+                fontFamily: 'Helvetica, Arial, sans-serif',
+                whiteSpace: 'nowrap',
+                textDecoration: 'none',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: '10px center',
+                borderRadius: '3px',
+                backgroundImage: "url('https://badges.strava.com/logo-strava-echelon.png')",
+              }}
+              href="https://strava.com/athletes/7899663"
+              target="_clean"
+            >
+              Volg mij via
+              <Image
+                src="https://badges.strava.com/logo-strava.png"
+                alt="Strava"
+                style={{marginLeft: '2px', verticalAlign: 'text-bottom'}}
+                height={13}
+                width={51}
+              />
             </a>
           </div>
         </div>
