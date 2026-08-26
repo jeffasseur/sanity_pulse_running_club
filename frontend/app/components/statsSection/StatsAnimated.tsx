@@ -45,6 +45,30 @@ const barNumbers = Array.from({length: 33}, (_, i) => i + 1)
 
 const statAccents = ['text-brand', 'text-blue']
 
+function BarsSection() {
+  const [ref, inView] = useInView<HTMLDivElement>()
+
+  return (
+    <div
+      ref={ref}
+      className="flex h-100 flex-row items-end justify-between gap-1.5 sm:gap-2 sm:-mt-25 md:mt-0 md:gap-3 lg:h-120 lg:-mt-25 lg:gap-4 xl:gap-6"
+    >
+      {barNumbers.map((num) => (
+        <div
+          key={num}
+          className={`h-full w-2 shrink-0 rounded-xl ${hiddenOnMobile.has(num) ? 'hidden md:block' : ''}`}
+          style={{
+            maxHeight: inView ? `${barHeights[num]}%` : '0%',
+            transition: `max-height 700ms cubic-bezier(0.4, 0, 0.2, 1) ${num * 30}ms`,
+            backgroundImage:
+              'linear-gradient(180deg, var(--color-brand), rgba(255, 255, 255, 0.3) 85%, var(--color-black))',
+          }}
+        />
+      ))}
+    </div>
+  )
+}
+
 export type StatItem = {
   value: string
   label: string
@@ -130,19 +154,7 @@ export default function StatsAnimated({
           )}
         </div>
 
-        <div className="flex h-100 flex-row items-end justify-between gap-1.5 sm:gap-2 sm:-mt-25 md:mt-0 md:gap-3 lg:h-120 lg:-mt-25 lg:gap-4 xl:gap-6">
-          {barNumbers.map((num) => (
-            <div
-              key={num}
-              className={`h-full w-2 shrink-0 rounded-xl ${hiddenOnMobile.has(num) ? 'hidden md:block' : ''}`}
-              style={{
-                maxHeight: `${barHeights[num]}%`,
-                backgroundImage:
-                  'linear-gradient(180deg, var(--color-brand), rgba(255, 255, 255, 0.3) 85%, var(--color-black))',
-              }}
-            />
-          ))}
-        </div>
+        <BarsSection />
       </div>
     </section>
   )
