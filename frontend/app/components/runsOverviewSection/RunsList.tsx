@@ -59,9 +59,7 @@ function RunRow({run, index}: {run: RunListItem, index: number}) {
 
         <h3 className="text-2xl font-medium tracking-tight text-white md:text-3xl">{title}</h3>
 
-        {(description || details) && (
-          <p className="max-w-prose opacity-70">{description || details}</p>
-        )}
+        {(description || details) && <p className="max-w-prose opacity-70">{details}</p>}
       </div>
     </Link>
   )
