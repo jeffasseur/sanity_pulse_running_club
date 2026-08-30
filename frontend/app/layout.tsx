@@ -2,6 +2,7 @@ import 'lenis/dist/lenis.css'
 import './globals.css'
 
 import {SpeedInsights} from '@vercel/speed-insights/next'
+import {GoogleTagManager} from '@next/third-parties/google'
 import type {Metadata} from 'next'
 import {Inter, IBM_Plex_Mono} from 'next/font/google'
 import {draftMode} from 'next/headers'
@@ -77,6 +78,7 @@ export default async function RootLayout({children}: LayoutProps<'/'>) {
 
   return (
     <html lang="en" className={`${inter.variable} ${ibmPlexMono.variable} bg-white text-black`}>
+      <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID || ''} />
       <body>
         <LenisProvider>
           <section className="min-h-screen">
