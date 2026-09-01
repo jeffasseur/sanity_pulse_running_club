@@ -45,12 +45,6 @@ export type StatsSection = {
   _type: 'statsSection'
   eyebrow?: string
   heading?: string
-  stats?: Array<{
-    value: string
-    label: string
-    _type: 'stat'
-    _key: string
-  }>
 }
 
 export type TwoColsImageParallaxSection = {

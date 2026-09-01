@@ -8,7 +8,7 @@ import {UpcomingRunsQueryResult, PastRunsQueryResult} from '@/sanity.types'
 
 type RunListItem = UpcomingRunsQueryResult[number] | PastRunsQueryResult[number]
 
-function RunRow({run, index}: {run: RunListItem, index: number}) {
+function RunRow({run, index, runType}: {run: RunListItem; index: number; runType?: string}) {
   const {_id, title, slug, description, image, location, date, distance, pace} = run
 
   const details = [distance && `${distance} km`, pace && `${pace} min/km`]
@@ -19,7 +19,8 @@ function RunRow({run, index}: {run: RunListItem, index: number}) {
     <Link
       href={`/runs/${slug}`}
       data-sanity={dataAttr({id: _id, type: 'run', path: 'title'}).toString()}
-      className={`group flex gap-6 border-b py-8 no-underline transition-opacity duration-300 hover:opacity-70 sm:items-center px-4 rounded-[.25em] ${index === 0 ? 'bg-brand border-brand' : 'border-white/10'}`}
+      className={`group flex gap-6 border-b py-8 no-underline transition-opacity duration-300 hover:opacity-70 sm:items-center px-4 rounded-[.25em]
+        ${index === 0 && date && date > new Date().toISOString() ? 'bg-brand border-brand' : 'border-white/10'} ${runType === RunsType.PAST ? 'opacity-60 pointer-events-none' : ''}`}
     >
       {image?.asset?._ref && (
         <div className="aspect-3/2 w-full overflow-hidden bg-gray-900 max-w-40">
@@ -38,7 +39,7 @@ function RunRow({run, index}: {run: RunListItem, index: number}) {
 
       <div className="flex flex-col gap-3">
         <div className="flex flex-wrap items-center gap-3 font-mono text-xs uppercase tracking-widest mb-2">
-          {index === 0 && (
+          {index === 0 && date && date > new Date().toISOString() && (
             <div className="flex items-center gap-3">
               <span className="bg-white rounded-[.25em] px-2 py-1 text-black">Volgende run</span>
               <span className="h-1 w-1 flex-none rounded-full bg-gray-200" />
@@ -99,9 +100,7 @@ const RunsList = async ({runType}: {runType?: string}) => {
   return (
     <>
       {runs.length > 0 ? (
-        runs.map((run, index) => (
-          <RunRow key={run._id} run={run} index={index} />
-        ))
+        runs.map((run, index) => <RunRow key={run._id} run={run} index={index} runType={runType} />)
       ) : (
         <p className="text-white/70">Er zijn momenteel geen runs gepland.</p>
       )}
