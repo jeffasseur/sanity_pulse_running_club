@@ -32,7 +32,7 @@ export default async function RunsOverviewSection({block}: {block: ExtractPageBu
             </h2>
 
             {block?.button?.text && block?.button?.link && (
-              <Button text={block.button.text} href={block.button.link.href} variant="white" />
+              <Button text={block.button.text} link={block.button.link} variant="white" />
             )}
           </aside>
 

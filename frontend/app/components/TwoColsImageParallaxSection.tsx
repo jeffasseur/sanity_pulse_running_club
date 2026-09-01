@@ -43,7 +43,6 @@ const TwoColsImageParallaxSection = ({
     }
   }, [])
 
-  console.log('Two Cols: ', block)
   return (
     <div
       ref={containerRef}

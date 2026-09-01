@@ -1,4 +1,7 @@
+import {DereferencedLink} from '@/sanity/lib/types'
 import Link from 'next/link'
+import {linkResolver} from '@/sanity/lib/utils'
+import {Link as SanityLink} from '@/sanity.types'
 
 type ButtonVariant = 'white' | 'black' | 'brand'
 
@@ -22,13 +25,20 @@ const Button = ({
   variant = 'brand',
   href = '#',
   target,
+  link,
 }: {
   text: string
   variant?: ButtonVariant
   href?: string
   target?: string
+  link?: DereferencedLink | SanityLink
 }) => {
   const {background, text: textColor} = variantStyles[variant]
+
+  if (link) {
+    href = linkResolver(link) || '#'
+    target = link?.openInNewTab ? '_blank' : undefined
+  }
 
   return (
     <Link
