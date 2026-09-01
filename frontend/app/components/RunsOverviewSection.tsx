@@ -13,8 +13,6 @@ export default async function RunsOverviewSection({block}: {block: ExtractPageBu
   const firstWord = titleArray.shift() || ''
   const remainingWords = titleArray.join(' ')
 
-  console.log('RunsOverviewSection block:', block?.runs) // Debugging line to check the block content
-
   return (
     <section className="bg-black py-24 text-white lg:py-32">
       <div className="container">
