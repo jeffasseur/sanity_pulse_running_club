@@ -56,6 +56,11 @@ export const runType = defineType({
       title: 'Pace (min/km)',
       type: 'string',
     }),
+    defineField({
+      name: 'applyLink',
+      title: 'Apply Link',
+      type: 'url',
+    }),
   ],
   preview: {
     select: {

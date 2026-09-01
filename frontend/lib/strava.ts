@@ -84,6 +84,7 @@ export async function getClubStats(clubId = process.env.STRAVA_CLUB_ID || DEFAUL
     ])
 
     if (!clubRes.ok || !activitiesRes.ok) {
+      return null;
       throw new Error(`Strava API error: club=${clubRes.status} activities=${activitiesRes.status}`)
     }
 
