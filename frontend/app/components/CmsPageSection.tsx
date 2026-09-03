@@ -46,7 +46,8 @@ export function CmsPageSection({
       case 'Locatie':
         return {...detail, values: [run?.location?.address || 'Onbekend']}
       case 'Datum':
-        return {...detail, values: [run?.date || 'Onbekend']}
+        const date = run?.date ? new Date(run.date).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : 'Onbekend'
+        return {...detail, values: [date]}
       case 'Afstand':
         return {...detail, values: [run?.distance + ' km' || 'Onbekend']}
       case 'Pace':
