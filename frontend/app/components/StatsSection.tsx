@@ -11,7 +11,12 @@ type StatsSectionProps = {
 
 export default async function StatsSection({block}: StatsSectionProps) {
   const {eyebrow, heading} = block
-  const {memberCount, recentDistanceKm} = await getClubStats()
+  const getClubStatsResult = await getClubStats()
+
+  if (!getClubStatsResult) {
+    return null
+  }
+  const {memberCount, recentDistanceKm} = getClubStatsResult
 
   const stats: StatItem[] = [
     memberCount !== null && {value: String(memberCount), label: 'Runners in the club'},

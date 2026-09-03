@@ -1,7 +1,6 @@
 import type {Metadata, ResolvingMetadata} from 'next'
 import {notFound} from 'next/navigation'
 
-import DateComponent from '@/app/components/Date'
 import {sanityFetch} from '@/sanity/lib/live'
 import {runPagesSlugs, runQuery} from '@/sanity/lib/queries'
 import {resolveOpenGraphImage} from '@/sanity/lib/utils'
