@@ -76,7 +76,9 @@ export function CmsPageSection({
             <div className="flex flex-col gap-10">
               {defaultBodySections.map((section) => (
                 <div key={section.heading} className="flex flex-col gap-6">
-                  <h3 className="text-2xl font-medium tracking-tight text-black">{section.heading}</h3>
+                  <h3 className="text-2xl font-medium tracking-tight text-black">
+                    {section.heading}
+                  </h3>
                   {section.paragraph && (
                     <p className="text-lg text-black/70 sm:text-xl">{section.paragraph}</p>
                   )}
@@ -114,7 +116,9 @@ export function CmsPageSection({
               </div>
 
               <Link
-                href={run?.applyLink || '#'}
+                href="https://www.strava.com/clubs/1778757/group_events/3528359338818449614/occurrences/FQIWnMOl4_yHoPdhHBTUHxQSFBgUFBQAFAAAHBaAkIvKkmgAAA=="
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-full rounded-full bg-brand px-6 py-3 text-center font-mono text-sm uppercase tracking-wide text-white transition-colors duration-200 hover:bg-brand/70 focus:bg-brand/70"
               >
                 Inschrijven
