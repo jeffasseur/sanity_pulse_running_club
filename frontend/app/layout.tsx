@@ -10,7 +10,7 @@ import {toPlainText} from 'next-sanity'
 import {VisualEditing} from 'next-sanity/visual-editing'
 import {Toaster} from 'sonner'
 
-import DraftModeToast from '@/app/components/DraftModeToast'
+// import DraftModeToast from '@/app/components/DraftModeToast'
 import Footer from '@/app/components/Footer'
 import Header from '@/app/components/header/Header'
 import * as demo from '@/sanity/lib/demo'
@@ -86,7 +86,7 @@ export default async function RootLayout({children}: LayoutProps<'/'>) {
             <Toaster />
             {isDraftMode && (
               <>
-                <DraftModeToast />
+                {/* <DraftModeToast /> */}
                 {/*  Enable Visual Editing, only to be rendered when Draft Mode is enabled */}
                 <VisualEditing />
               </>
