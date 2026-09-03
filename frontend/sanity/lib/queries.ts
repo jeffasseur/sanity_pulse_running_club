@@ -135,6 +135,7 @@ const runFields = /* groq */ `
   date,
   distance,
   pace,
+  applyLink,
 `
 
 export const upcomingRunsQuery = defineQuery(`
