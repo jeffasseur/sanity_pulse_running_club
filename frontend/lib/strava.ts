@@ -42,9 +42,9 @@ async function getAccessToken(): Promise<string | null> {
 
   if (!clientId || !clientSecret || !refreshToken) {
     return null;
-    throw new Error(
-      'Missing Strava credentials: set STRAVA_CLIENT_ID, STRAVA_CLIENT_SECRET and STRAVA_REFRESH_TOKEN',
-    )
+    // throw new Error(
+    //   'Missing Strava credentials: set STRAVA_CLIENT_ID, STRAVA_CLIENT_SECRET and STRAVA_REFRESH_TOKEN',
+    // )
   }
 
   const res = await fetch('https://www.strava.com/oauth/token', {
@@ -73,7 +73,7 @@ export type ClubStats = {
   recentDistanceKm: number | null
 }
 
-export async function getClubStats(clubId = process.env.STRAVA_CLUB_ID || DEFAULT_CLUB_ID): Promise<ClubStats> {
+export async function getClubStats(clubId = process.env.STRAVA_CLUB_ID || DEFAULT_CLUB_ID): Promise<ClubStats | null> {
   try {
     const accessToken = await getAccessToken()
     const headers = {Authorization: `Bearer ${accessToken}`}
@@ -85,7 +85,7 @@ export async function getClubStats(clubId = process.env.STRAVA_CLUB_ID || DEFAUL
 
     if (!clubRes.ok || !activitiesRes.ok) {
       return null;
-      throw new Error(`Strava API error: club=${clubRes.status} activities=${activitiesRes.status}`)
+      // throw new Error(`Strava API error: club=${clubRes.status} activities=${activitiesRes.status}`)
     }
 
     const club: StravaClub = await clubRes.json()
